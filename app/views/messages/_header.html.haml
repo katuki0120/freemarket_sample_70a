@@ -1,1 +1,34 @@
-test1
+%header{class:"header-max"}
+    .header-max_inner
+      .header-max_inner_top
+        %h1
+          %a{href:"#"}
+            %img{src:"/assets/logo.png"}
+        %form
+          %input{placeholder:"キーワードを探してください"}
+          %img{src:"/assets/icon-search 1.png",class:"search-btn"}
+      .header-max_inner_under
+        %nav{class:"nav-lists"}
+          .nav-lists_left
+            %ul
+              %li
+                %h2
+                  %a{href:"#"}
+                    %img{src:"/assets/icon_category.png", width:"30"}
+                    %span カテゴリーから探す
+                %ul
+                  %li
+              %li
+                %h2
+                  %a{href:"#"}
+                    %img{src:"/assets/icon_brand.png", width:"30"}
+                    %span ブランドから探す
+          .nav-lists_right
+            %ul
+              %li
+                %a{href:"#"}
+                  %span ログイン
+              %li
+                %a{href:"#"}
+                  %span 新規登録
+              

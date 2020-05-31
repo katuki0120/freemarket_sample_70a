@@ -1,0 +1,20 @@
+.btn {
+  width: 120px;
+  background-color: #3ccace;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  border-radius: 4%;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  span {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+  }
+  img {
+    width: 60%;
+  }
+}
