@@ -1,12 +1,18 @@
-.header-max {
+* {
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", Helvetica, Arial, "游ゴシック体", "YuGothic",
+    "メイリオ", "Meiryo", sans-serif;
+}
+
+.header {
   padding: 0 60px;
   background: rgb(255, 255, 255);
   z-index: 1001;
 
-  .header-max_inner {
+  &__inner {
     margin: 0 auto;
     padding: 8px 0 10px;
-    .header-max_inner_top {
+    &--top {
       display: flex;
       justify-content: space-between;
       -webkit-box-align: center;
@@ -23,7 +29,6 @@
             width: 100%;
             display: block;
             cursor: pointer;
-            vertical-align: bottom;
           }
         }
       }
@@ -49,19 +54,20 @@
           -webkit-box-pack: center;
           -webkit-box-align: center;
           cursor: pointer;
-          background-color: skyblue;
+          background-color: #3ccace;
           z-index: 3;
+          padding: 8px;
         }
       }
     }
 
-    .header-max_inner_under {
+    &--under {
       margin: 8px 0 0;
-      .nav-lists {
+      .nav__lists {
         height: 100%;
         position: relative;
         display: flex;
-        .nav-lists_left {
+        &--left {
           display: flex;
           ul {
             display: flex;
@@ -77,7 +83,6 @@
                     display: flex;
                     overflow: hidden;
                     line-height: 1;
-                    speak: none;
                     text-transform: none;
                     vertical-align: bottom;
                   }
@@ -89,7 +94,7 @@
             }
           }
         }
-        .nav-lists_right {
+        &--right {
           float: right;
           margin-left: auto;
           ul {
@@ -101,8 +106,7 @@
                 color: black;
                 display: flex;
                 text-align: center;
-                i {
-                }
+
                 span {
                   padding-left: 10px;
                   display: block;

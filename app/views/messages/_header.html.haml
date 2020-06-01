@@ -1,15 +1,15 @@
-%header{class:"header-max"}
-  .header-max_inner
-    .header-max_inner_top
+%header{class:"header"}
+  .header__inner
+    .header__inner--top
       %h1
-        %a{href:"#"}
+        %a{href:"/"}
           %img{src:"/assets/logo.png"}
       %form
         %input{placeholder:"キーワードを探してください"}
         %img{src:"/assets/icon-search 1.png",class:"search-btn"}
-    .header-max_inner_under
-      %nav{class:"nav-lists"}
-        .nav-lists_left
+    .header__inner--under
+      %nav{class:"nav__lists"}
+        .nav__lists--left
           %ul
             %li
               %h2
@@ -23,12 +23,11 @@
                 %a{href:"#"}
                   %img{src:"/assets/icon_brand.png", width:"30"}
                   %span ブランドから探す
-        .nav-lists_right
+        .nav__lists--right
           %ul
             %li
               %a{href:"#"}
-                %span ログイン
+              %span ログイン
             %li
               %a{href:"#"}
-                %span 新規登録
-            
+              %span 新規登録
