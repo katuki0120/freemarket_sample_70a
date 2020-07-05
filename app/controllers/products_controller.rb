@@ -14,6 +14,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    else
+
+  end
+
   private
 
   def product_params
