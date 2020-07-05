@@ -264,7 +264,7 @@ a {
   width: 0;
   height: 0;
   border-width: 120px 120px 0 0;
-  border-color: #ea352d transparent transparent transparent;
+  border-color: $skyblue transparent transparent transparent;
   display: block;
   position: absolute;
   top: 0;
@@ -277,9 +277,8 @@ a {
     position: absolute;
     left: 0;
     z-index: 2;
-    color: #fff;
+    color: $white;
     transform: rotate(-45deg);
     letter-spacing: 2px;
     font-weight: 600;
   }
-}
