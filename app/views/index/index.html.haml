@@ -80,20 +80,25 @@
     .display__sentence
       = link_to "新規投稿商品", "/", class: "display__link"
     .display__lists
-      = render 'display'
-      = render 'display'
-      = render 'display'
-      = render 'display'
+     /各each前のa~dにカテゴリー名（複数形）が入る/
+      - @a.each do |product|
+        = render 'display', product: product
+      - @b.each do |product|
+        = render 'display', product: product
+      - @c.each do |product|
+        = render 'display', product: product
+      - @d.each do |product|
+        = render 'display', product: product
 .display
   .display__title ピックアップブランド
   .display__contents
     .display__sentence
       = link_to "アーカイバ", "/" , class: "display__link"
     .display__lists
-      = render 'display'
-      = render 'display'
-      = render 'display'
-      = render 'display'
+      = render 'display', product: product
+      = render 'display', product: product
+      = render 'display', product: product
+      = render 'display', product: product
 = render 'mypages/aside'
 = render 'mypages/footer'
 = render 'mypages/exhibition_icon'
