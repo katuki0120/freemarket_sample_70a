@@ -1,70 +1,40 @@
-.wrapper
-  = render "mypages/header"
-  %main.main__lists
-    .main__lists__contents
-      %section.main__lists__contents--details
-        %h2.card__title クレジットカード情報入力
-        = form_tag("/creditcard", method: :post, id: 'charge-form',  name: "inputForm", class: "main__lists__contents--details--input") do
-          .form__main__container
-            .form__content
-              %label.payment__card カード番号
-              %span.require__form 必須
-              = text_field_tag 'payment_card_no', "", class: 'creditcardnumber', id: "payment_card_no", placeholder: '半角数字のみ', type: "text", maxlength: "16"
-              .card__list
-                .card__list__picture
-                  = image_tag "logo_visa.gif", width:"34",height:"22"
-                  = image_tag "mc_vrt_opt_pos_46_2x.png", width:"34",height:"22"
-                  = image_tag "jcb-logomark-img-01.gif", width:"32",height:"20"
-                  = image_tag "amex-logomark-img-04.gif", width:"21",height:"20"
-                  = image_tag "diners-logomark-img-01.gif", width:"28",height:"20"
-                  = image_tag "discover-logomark-img-08.gif", width:"32",height:"20"
-            .form__content.top__contents
-              %label.payment__card 有効期限
-              %span.require__form 必須
-              .select__box
-                .select__box__half
-                  %select.select__default#payment_card_month{name: "payment_card_month", type: "text"}
-                    %option{value: ""} --
-                    %option{value: "1"}01
-                    %option{value: "2"}02
-                    %option{value: "3"}03
-                    %option{value: "4"}04
-                    %option{value: "5"}05
-                    %option{value: "6"}06
-                    %option{value: "7"}07
-                    %option{value: "8"}08
-                    %option{value: "9"}09
-                    %option{value: "10"}10
-                    %option{value: "11"}11
-                    %option{value: "12"}12
-                  %span 月
-                .select__box__half
-                  .icon
-                  %select.select__default#payment_card_year{name: "payment_card_year", type: "text"}
-                    %option{value: ""} --
-                    %option{value: "2020"}20
-                    %option{value: "2021"}21
-                    %option{value: "2022"}22
-                    %option{value: "2023"}23
-                    %option{value: "2024"}24
-                    %option{value: "2025"}25
-                    %option{value: "2026"}26
-                    %option{value: "2027"}27
-                    %option{value: "2028"}28
-                    %option{value: "2029"}29
-                    %option{value: "2030"}30
-                  %span  年
-            .form__content.top__contents
-              %label セキュリティーコード
-              %span.require__form 必須
-              = text_field_tag "payment_card_cvc", "", class: "cvc", placeholder: "カード背面4桁もしくは3桁の番号", maxlength: "4", id: "payment_card_cvc"
-              .single__code
-                .single__code__text
-                  %span.form__question ? 
-                  %span カードの裏面の番号とは？
-            .add
-              = submit_tag "登録する", class: "add__btn", id: "payment_card_submit-button"
-    = render "mypages/navlists"
-  = render "mypages/aside"
-  = render "mypages/footer"
-  = render "mypages/exhibition_icon"
+.cardNew
+  .title 
+    クレジットカード情報入力
+  .cardForm
+    = form_with model: @card, id: "form" do |f|
+      .cardForm__number
+        = f.label :カード番号, class: "cardForm__number__title"
+        %span.must_check 必須
+      .cardForm__field
+        = f.text_field :card_number, id: "card_number", placeholder: "半角数字のみ", class: "form-group__input", maxlength: 16
+      .cardForm__image
+        = image_tag(image_path('cards/icon_visa.png'), class: 'visa', width: 58, height: 28)
+        = image_tag(image_path('cards/icon_mastercard.png'), class: 'master', width: 47, height: 36)
+        = image_tag(image_path('cards/icon_jcb.png'), class: 'jcb', width: 40, height: 30)
+        = image_tag(image_path('cards/icon_amex.png'), class: 'amex', width: 40, height: 30)
+        = image_tag(image_path('cards/icon_diners.png'), class: 'diners', width: 45, height: 32)
+        = image_tag(image_path('cards/icon_discover.png'), class: 'discover', width: 47, height: 30)
+      .cardForm__expirationdate
+        .cardForm__expirationdate__details
+          = f.label :有効期限
+          %span.must_check 必須
+          %br
+        .cardForm__expirationdate__choice
+          .cardForm__expirationdate__choice__month
+            = f.select :expiration_month, options_for_select(["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]), {}, {id: "exp_month", name: "exp_month", type: "text"}
+            = f.label :月, class: "cardForm__expirationdate__choice__month__label"
+          .cardForm__expirationdate__choice__year
+            = f.select :expiration_year, options_for_select((2020..2030)), {}, {id: "exp_year", name: "exp_year", type: "text"}
+            = f.label :年, class: "cardForm__expirationdate__choice__year__label"
+      .cardForm__securitycode
+        .cardForm__securitycode__details
+          .cardForm__securitycode__details__title 
+            = f.label :セキュリティコード, class: "label"
+            %span.must_check 必須
+          .cardForm__securitycode__details__field
+            = f.text_field :cvc,  id: "cvc", class: "cvc", placeholder: "カード背面3~4桁の番号", maxlength: "4"
+          .cardForm__securitycode__details__hatena
+            = link_to "カード背面の番号とは?", "#", class: "cardForm__securitycode__details__hatena__link"
+      #card_token
+        = f.submit "登録する", id: "token_submit", url: cards_path, method: :post
