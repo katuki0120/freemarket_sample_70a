@@ -1,11 +1,20 @@
-.display__list
-  = link_to "/" do
-    .display__pic
-      = image_tag "pict-reason-01.jpg" ,class:"imgpic"
-      .display__body
-        %h3.display__name product1
-        .display__details
-          %ul.display__content
-            %li 1000円
-            %li.fa.fa-star.likeIcon 0
-          %p (税込)
+= link_to product_path(product.id), class: "display__list" do
+  .display__pic
+    - if product.images.present?
+      .imgpic
+        = image_tag (product.images[0].product_image.url)
+    -else
+      = image_tag "no_image.png"
+    /productテーブルにbuyer_idを追加
+    -if product.buyer_id.present?
+      .items-box_photo__sold
+        .items-box_photo__sold__inner
+          SOLD
+    .display__body
+      %h3.display__name
+        = product.name
+      .display__details
+        %ul.display__content
+          = "¥ #{product.price.to_s(:delimited)}"
+          %li.fa.fa-star.likeIcon 0
+        %p (税込)
