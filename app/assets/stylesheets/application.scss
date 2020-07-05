@@ -1,7 +1,7 @@
 @import "reset";
 @import "variables";
-@import "modules/item_page";
-@import "modules/purchase";
+@import "products/show";
+@import "products/purchase";
 @import "modules/mypages";
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -16,7 +16,7 @@
 @import "modules/creditcard-new";
 @import "modules/creditcard-create";
 @import "modules/sign_up";
-@import "products";
+@import "products/new";
 @import "modules/comp_reg";
 @import "modules/login";
 
