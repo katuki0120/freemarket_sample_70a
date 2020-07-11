@@ -12,23 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_07_05_044657) do
 
-  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "destination_family_name", null: false
-    t.string "destination_first_name", null: false
-    t.string "destination_family_name_kana", null: false
-    t.string "destination_first_name_kana", null: false
-    t.integer "postal_code", null: false
-    t.string "prefecture", null: false
-    t.string "city", null: false
-    t.string "address", null: false
-    t.string "building_name"
-    t.integer "phone_namber", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
-  end
-
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -123,19 +106,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_044657) do
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "family_name", null: false
-    t.string "first_name", null: false
-    t.string "family_name_kana", null: false
-    t.string "first_name_kana", null: false
-    t.date "birthday", null: false
-    t.text "introduction"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
-  end
-
   create_table "shipments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "shipment", null: false
     t.string "area", null: false
@@ -152,8 +122,24 @@ ActiveRecord::Schema.define(version: 2020_07_05_044657) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nickname", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "family_name", null: false
+    t.string "first_name", null: false
+    t.string "family_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.date "birthday", null: false
+    t.string "destination_family_name", null: false
+    t.string "destination_first_name", null: false
+    t.string "destination_family_name_kana", null: false
+    t.string "destination_first_name_kana", null: false
+    t.integer "postal_code", null: false
+    t.string "prefecture", null: false
+    t.string "city", null: false
+    t.string "address", null: false
+    t.string "building_name"
+    t.integer "phone_number"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -163,7 +149,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_044657) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "addresses", "users"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "credit_cards", "users"
@@ -177,5 +162,4 @@ ActiveRecord::Schema.define(version: 2020_07_05_044657) do
   add_foreign_key "products", "shipments"
   add_foreign_key "products", "sizes"
   add_foreign_key "products", "users"
-  add_foreign_key "profiles", "users"
 end
