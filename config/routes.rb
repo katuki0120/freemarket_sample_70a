@@ -22,3 +22,4 @@ Rails.application.routes.draw do
       get 'update_done' # これを追加
     end
   end
+end

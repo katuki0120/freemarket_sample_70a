@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :category_parent_array, only: [:new, :create, :edit]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :show_all_instance, only: [:show, :edit, :destroy]
   
   def edit
@@ -31,39 +31,41 @@ class ProductsController < ApplicationController
   
   def update
     # ①
-    if item_params[:images_attributes].nil?
+    if product_params[:images_attributes].nil?
       flash.now[:alert] = '更新できませんでした 【画像を１枚以上入れてください】'
       render :edit
     else
     # ②
       exit_ids = []
-      item_params[:images_attributes].each do |a,b|
-        exit_ids << item_params[:images_attributes].dig(:"#{a}",:id).to_i
+      product_params[:images_attributes].each do |a,b|
+        exit_ids << product_params[:images_attributes].dig(:"#{a}",:id).to_i
       end
-      ids = Image.where(item_id: params[:id]).map{|image| image.id }
+      ids = Product.where(product_id: params[:id]).map{|image| product_image.id }
     # ③
       delete__db = ids - exit_ids
-      Image.where(id:delete__db).destroy_all
+      Product.where(id:delete__db).destroy_all
     # ④
-      @item.touch
-      if @item.update(item_params)
-        redirect_to  update_done_items_path
+      @product.touch
+      if @product.update(product_params)
+        redirect_to  update_done_products_path
       else
         flash.now[:alert] = '更新できませんでした'
         render :edit
       end
     end
   end
-
-#中略
+  
+  def update_done
+    @product_update = Product.order("updated_at DESC").first
+  end
 
   private
     def product_params
-      params.require(:product).permit(:name, :price, :category, :brand, :product_condition, :size, :dealing_status, :shipment,:buyer_id, :, images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+      params.require(:product).permit(:name, :price, :category, :brand, :product_condition, :size, :dealing_status, :shipment,:buyer_id, :product_introduction, images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
     end
   
-    def set_item
-      @item = Item.find(params[:id])                                # ⑦ 該当の商品情報をインスタンス変数へ代入
+    def set_product
+      @product = Product.find(params[:id])                                # ⑦ 該当の商品情報をインスタンス変数へ代入
     end
   
     def category_parent_array
@@ -71,10 +73,10 @@ class ProductsController < ApplicationController
     end
   
     def show_all_instance
-      @user = User.find(@item.user_id)
-      @images = Image.where(item_id: params[:id])                   # ⑨ 該当商品の画像をインスタンス変数へ代入
-      @images_first = Image.where(item_id: params[:id]).first
-      @category_id = @item.category_id                              # ⑩ 該当商品のレコードからカテゴリーidを取得し、インスタンス変数へ代入（この際に取得するidは孫カテゴリーidです。）
+      @user = User.find(@priduct.user_id)
+      @images = Product.where(product_id: params[:id])                   # ⑨ 該当商品の画像をインスタンス変数へ代入
+      @images_first = Product.where(product_id: params[:id]).first
+      @category_id = @product.category_id                              # ⑩ 該当商品のレコードからカテゴリーidを取得し、インスタンス変数へ代入（この際に取得するidは孫カテゴリーidです。）
       @category_parent = Category.find(@category_id).parent.parent                    
       @category_child = Category.find(@category_id).parent
       @category_grandchild = Category.find(@category_id)
