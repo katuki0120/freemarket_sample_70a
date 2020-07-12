@@ -1,83 +1,102 @@
 class CreditcardController < ApplicationController
+  require "payjp" #PAYJPとやり取りするために、payjpをロード
   
-  before_action :set_card, only: [:new, :show, :destroy]
-  before_action :set_payjpSecretKey, except: :new
-  before_action :set_user
-
-  require "payjp"
-
-  def new
-    redirect_to action: :show, id: current_user.id if @card.present?
-    @creditcard = Creditcard.new 
-    gon.payjpPublicKey = Rails.application.credentials[:payjp][:PAYJP_PUBLIC_KEY]
-  end
-
-  def create
-    render action: :new if params['payjpToken'].blank?
-    customer = Payjp::Customer.create(
-      card: params['payjpToken']
-    )
-    @creditcard = Ccreditcard.new(
-      card_id: customer.default_card,
-      user_id: current_user.id,
-      customer_id: customer.id
-    )
-    if @creditcard.save
-      flash[:notice] = 'クレジットカードの登録が完了しました'
-      redirect_to action: :show, id: current_user.id
-    else
-      flash[:alert] = 'クレジットカード登録に失敗しました'
-      redirect_to action: :new
+    def new
+      # すでにクレジットカード登録されている場合は、showアクションにリダイレクト
+      @card = CreditCard.where(user_id: current_user.id)
+      redirect_to credit_card_path(current_user.id) if @card.exists?
     end
-  end
-
-   def show
-    redirect_to action: :new if @creditcard.blank?
-    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
-    default_card_information = customer.cards.retrieve(@creditcard.card_id)
-    @card_info = customer.cards.retrieve(@creditcard.card_id)
-    @exp_month = default_card_information.exp_month.to_s
-    @exp_year = default_card_information.exp_year.to_s.slice(2,3)
-    customer_card = customer.cards.retrieve(@creditcard.card_id)
-    @card_brand = customer_card.brand
-    case @card_brand
-    when "Visa"
-      @creditcard_src = "icon_visa.png"
-    when "JCB"
-      @creditcard_src = "icon_jcb.png"
-    when "MasterCard"
-      @creditcard_src = "icon_mastercard.png"
-    when "American Express"
-      @creditcard_src = "icon_amex.png"
-    when "Diners Club"
-      @creditcard_src = "icon_diners.png"
-    when "Discover"
-      @creditcard_src = "icon_discover.png"
+  
+    def create
+      # 前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
+      Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+  
+      # 後ほどトークン作成処理を行いますが、そちらの完了の有無でフラッシュメッセージを表示させます。
+      if params["payjp_token"].blank?
+        redirect_to action: "new", alert: "クレジットカードを登録できませんでした。"
+      else
+      # 無事トークン作成された場合のアクション(こっちが本命のアクション)
+      # まずは生成したトークンから、顧客情報と紐付け、PAY.JP管理サイトに登録
+        customer = Payjp::Customer.create(
+          email: current_user.email,
+          card: params["payjp_token"],
+          metadata: {user_id: current_user.id} #最悪なくてもOK！
+        )
+        # 今度はトークン化した情報を自アプリのCredit_cardsテーブルに登録！
+        @card = CreditCard.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
+        # 無事、トークン作成とともにcredit_cardsテーブルに登録された場合、createビューが表示されるように条件分岐
+        if @card.save
+          #もしcreateビューを作成しない場合はredirect_toなどで表示ビューを指定
+        else
+          redirect_to action: "create"
+        end
     end
-  end
 
-  def destroy
-    customer = Payjp::Customer.retrieve(@creditcard.customer_id)
-    @creditcard.destroy
-    customer.delete
-    flash[:notice] = 'クレジットカードが削除されました'
-    redirect_to controller: :users, action: :show, id: current_user.id
-  end
+    def show
+      # ログイン中のユーザーのクレジットカード登録の有無を判断
+      @card = CreditCard.find_by(user_id: current_user.id)
+      if @card.blank?
+        # 未登録なら新規登録画面に
+        redirect_to action: "new" 
+      else
+        # 前前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        # ログインユーザーのクレジットカード情報からPay.jpに登録されているカスタマー情報を引き出す
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        # カスタマー情報からカードの情報を引き出す
+        @customer_card = customer.cards.retrieve(@card.card_id)
+  
+        ##カードのアイコン表示のための定義づけ
+        @card_brand = @customer_card.brand
+        case @card_brand
+        when "Visa"
+          # 例えば、Pay.jpからとってきたカード情報の、ブランドが"Visa"だった場合は返り値として
+          # (画像として登録されている)Visa.pngを返す
+          @card_src = "visa.png"
+        when "JCB"
+          @card_src = "jcb.png"
+        when "MasterCard"
+          @card_src = "master.png"
+        when "American Express"
+          @card_src = "amex.png"
+        when "Diners Club"
+          @card_src = "diners.png"
+        when "Discover"
+          @card_src = "discover.png"
+        end
+  
+        #  viewの記述を簡略化
+        ## 有効期限'月'を定義
+        @exp_month = @customer_card.exp_month.to_s
+        ## 有効期限'年'を定義
+        @exp_year = @customer_card.exp_year.to_s.slice(2,3)
+      end
+    end
 
-  private
-  def set_card
-    @creditcard = Creditcard.where(user_id: current_user.id).first
-  end
-
-  def set_payjpSecretKey
-    Payjp.api_key = Rails.application.credentials[:payjp][:PAYJP_SECRET_KEY]
-  end
-
-  def set_cart
-    @cart = current_cart
-  end
-
-  def set_user
-    @user = current_user
+    def destroy
+      # ログイン中のユーザーのクレジットカード登録の有無を判断
+      @card = CreditCard.find_by(user_id: current_user.id)
+      if @card.blank?
+        # 未登録なら新規登録画面に
+        redirect_to action: "new"
+      else
+        # 前前回credentials.yml.encに記載したAPI秘密鍵を呼び出します。
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        # ログインユーザーのクレジットカード情報からPay.jpに登録されているカスタマー情報を引き出す
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        # そのカスタマー情報を消す
+        customer.delete
+        @card.delete
+        # 削除が完了しているか判断
+        if @card.destroy
+        # 削除完了していればdestroyのビューに移行
+        # destroyビューを作るのが面倒であれば、flashメッセージを入れてトップページやマイページに飛ばしてもOK
+  
+        else
+          # 削除されなかった場合flashメッセージを表示させて、showのビューに移行
+          redirect_to credit_card_path(current_user.id), alert: "削除できませんでした。"
+        end
+      end
+  
   end
 end
