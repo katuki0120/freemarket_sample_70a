@@ -1,0 +1,131 @@
+.sign_up_main
+  %header.sign_up_header
+    %h1
+      =image_tag  "logo.png" , width: "200px" , height: "50px"
+    %nav.prosess
+      %li.info
+        会員情報
+        .process_status
+          .process_bar
+      %li.fin
+        完了
+        .process_status
+          
+%main.sign_up_continer
+  .sign_up_continer__registration
+    .sign_up_continer__registration__header
+      %h.sign_up_continer__registration__header__info
+        会員情報入力
+    .sign_up_continer__registration__main
+      .sign_up_continer__registration__main__continer
+        = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'form', local: true do |form|
+          - if @user.errors.any?
+            .sign_up_continer_if
+              %h2= "#{@user.errors.full_messages.count}件のエラーが発生しました。"
+              %ul
+                - @user.errors.full_messages.each do |message|
+                  %li= message
+          .input
+            %label.input__label ニックネーム
+            %span.input__require 必須
+            = form.text_field :nickname, placeholder: '例）フリマ太郎', class: :input__default, autofocus: true
+          .input
+            %label.input__label メールアドレス
+            %span.input__require 必須
+            = form.email_field :email, autofocus: true, autocomplete: "email",placeholder: 'PC・携帯どちらでも可', class: :input__default
+          .input.input-password
+            %label.input__label パスワード 
+            %span.input__require 必須
+            .field
+            - if @minimum_password_length
+              %em
+                (#{@minimum_password_length} 文字以上)
+            %br/
+            = form.password_field :password, autocomplete: "new-password",placeholder: '7文字以上の半角英数字' , class: :input__default ,id: :"js-password"
+            = form.password_field :password_confirmation, placeholder: 'パスワード確認', class: :input__default ,id: :"js-password", autocomplete: "new-password"
+ 
+          .input
+            %h2.text__info 
+              本人確認
+            %p.text__info 
+              安心・安全にご利用いただくために、
+              お客さまの本人情報の登録にご協力ください。
+              他のお客さまに公開されることはありません。
+          .input
+            %label.input__label お名前(全角)
+            %span.input__require 必須
+            %br
+            = form.text_field :family_name, placeholder: '例）山田', class: 'input__default__half'
+            = form.text_field :first_name, placeholder: '例）太郎' , class: :input__default__half
+          .input
+            %label.input__label お名前カナ(全角)
+            %span.input__require 必須
+            %br
+            = form.text_field :family_name_kana, placeholder: '例）ヤマダ', class: :input__default__half
+            = form.text_field :first_name_kana, placeholder: '例）タロウ', class: :input__default__half
+          .input
+            %label.input__label 生年月日
+            %span.input__require 必須
+            %br
+            = form.date_select :birthday, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(1989, 1, 1)
+          .input
+            %label.input__label 送り先 お名前(全角)
+            %span.input__require 必須
+            %br
+            = form.text_field :destination_family_name , placeholder: '例）山田', class: :input__default__half
+            = form.text_field :destination_first_name, placeholder: '例）太郎', class: :input__default__half
+          .input
+            %label.input__label 送り先 お名前カナ(全角)
+            %span.input__require 必須
+            %br
+            = form.text_field :destination_family_name_kana, placeholder: '例）ヤマダ', class: :input__default__half
+            = form.text_field :destination_first_name_kana, placeholder: '例）タロウ', class: :input__default__half
+          .input
+            %label.input__label 郵便番号
+            %span.input__require 必須
+            %br
+            = form.text_field :postal_code, placeholder: '〒', class: :input__default__half
+          .input
+            %label.input__label 都道府県
+            %span.input__require 必須
+            %br
+            = form.select :prefecture, [['北海道', 0], ['青森県', 1],['岩手県', 2],['宮城県', 3],['秋田', 4],['山形県', 5],['福島県', 6],['茨城県', 7],['栃木県', 8],['群馬県', 9],['埼玉県', 10],['千葉県', 11],['東京都', 12],['神奈川県', 13],['新潟県', 14],['富山県', 15],['石川県', 16],['福井県', 17],['山梨県', 18],['長野県', 19],['岐阜県', 20],['静岡県', 21],['愛知県', 22],['三重県', 23],['滋賀県', 24],['京都府', 25],['大阪府', 26],['兵庫県', 27],['奈良県', 28],['和歌山県', 29],['鳥取県', 30],['島根県', 31],['岡山県', 32],['広島県', 33],['山口県', 34],['徳島県', 35],['香川県', 36],['愛媛県', 37],['高知県', 38],['福岡県', 39],['佐賀県', 40],['長崎県', 41],['熊本県', 42],['大分県', 43],['宮崎県', 44],['鹿児島県', 45],['沖縄県', 46]], {include_blank: true, selected: 12 }, { class: "select-default" } 
+          .input
+            %label.input__label 市区町村
+            %span.input__require 必須
+            %br
+            = form.text_field :city, placeholder: '例)名古屋市', class: :input__default__half
+          .input
+            %label.input__label 番地
+            %span.input__require 必須
+            %br
+            = form.text_field :address, placeholder: '例)100-1', class: :input__default__half
+          .input
+            %label.input__label ビル名・マンション名・部屋番号
+            %span.input__any 任意
+            %br
+            = form.text_field :building_name, placeholder: '例)テックキャンプ', class: :input__default__half
+          .input
+            %label.input__label お届け先 お電話番号
+            %span.input__any 任意
+            %br
+            = form.text_field :phone_number, placeholder: '例)080', class: :input__default__half
+            %h3.text__info
+              ※ 本人情報は正しく入力してください。
+              会員登録後、修正するにはお時間を頂く場合があります。
+          .input
+            = form.submit '次へ進む', class: :btn_default
+          .from
+            %p.form_tag
+              =link_to href: "" , target: "_blank" , rel: "noopner" do
+                本人情報の登録について＞
+            %p.privacy
+              This site is protected by reCAPTCHA and the Google
+              =link_to href: "" , target: "_blank" , rel: "noopner" do
+                Privacy Policy 
+              and 
+              =link_to href: "" , target: "_blank" , rel: "noopner" do
+                Terms of Service apply.
+            
+%footer.sign_up_footer
+  = render "login/simple_footer"

@@ -16,14 +16,18 @@
         %h.comp_reg_continer__header--info
           会員登録完了
       .comp_reg_continer__main
+        = link_to "FURIMAを始める" ,root_path ,class: :inputbtn__default
         %p.comp_reg_continer__main--info
           ありがとうございます。
           %br
           会員登録完了しました。
-        .input
-          %input{type: "submit" , class: "btn_default" , value: "FURIMAを始める"}
-        
+          %br
+          
+          
+        .input 
+         
         .comp_reg_continer__main--pic
+          
           %h1
             =image_tag  "bg-mainVisual-pict_pc.jpg" , width: "100%" , height: "325px"
         .comp_reg_continer__main--cat
@@ -40,4 +44,4 @@
           = link_to "#" do
             = image_tag "google-play-badge.png", class:"googleApp__btn"
   %footer.comp_reg_footer
-    =render "login/simple_footer"
+    = render "login/simple_footer"

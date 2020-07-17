@@ -1,0 +1,151 @@
+.wrapper
+  = render "mypages/header"
+
+  %nav.root
+    .root__lists
+      %li
+        = link_to "#", class: "root__lists--top-page" do
+          FURIMA
+      %li
+        = icon('fa', 'angle-right', class: 'root__lists__icon')
+      %li
+        = link_to "#", class: "root__lists--big-category" do
+          大カテゴリー
+      %li
+        = icon('fa', 'angle-right', class: 'root__lists__icon')
+      %li
+        = link_to "#", class: "root__lists--middle-category" do
+          中カテゴリー
+      %li
+        = icon('fa', 'angle-right', class: 'root__lists__icon')
+      %li
+        = link_to "#", class: "root__lists--small-category" do
+          小カテゴリー
+      %li
+        = icon('fa', 'angle-right', class: 'root__lists__icon')
+      %li
+        %p 
+          = @products.name
+  .main__contents
+    .item
+      .item__box
+        .item__box--name
+          = @products.name
+        .item__box--photos
+          .main
+            .main__image
+              = image_tag "a.png", class: "main__image--pic", height: "346px"
+              .sub__images
+                = image_tag "b.png", class: "sub__images--pic-1", height: "87px"
+                = image_tag "c.png", class: "sub__images--pic-2", height: "87px"
+                = image_tag "d.png", class: "sub__images--pic-3", height: "87px"
+        .item__box--price
+          %span
+            ¥
+            = @products.price
+          .item__box--price-detail
+            %span
+              (税込)
+            %span
+              送料込み
+        .item__box--three-btn
+        - if user_signed_in? && current_user.id == @products.user_id
+          .item__box--three-btn--change-btn
+            = link_to "商品の編集", purchase_index_path, class:"item__box--three-btn--change-btn--edit"
+            %p.text__box OR
+            = link_to "商品の削除", new_product_path , class:"item__box--three-btn--change-btn--delete"
+        - else
+          .item__box--three-btn--Purchase-btn
+            = link_to "購入画面に進む", purchase_index_path
+        .item__box--text 
+          = @products.product_introduction
+        .item__box--table
+          %table
+            %tbody
+              %tr
+                %th 出品者
+                %td 
+                  = @products.user.nickname
+              %tr
+                %th カテゴリー
+                %td
+                  = link_to "#", class:"big-category" do
+                    大カテゴリー
+                  %br/
+                  = link_to "#", class:"middle-category" do
+                    中カテゴリー
+                  %br/
+                  = link_to "#", class:"small-category" do
+                    小カテゴリー
+              %tr
+                %th ブランド
+                %td
+                  = @products.brand.name
+              %tr
+                %th 商品のサイズ
+                %td
+                  = @products.size.size
+              %tr
+                %th 商品の状態
+                %td 
+                  = @products.product_condition.product_condition
+              %tr
+                %th 配送料の負担
+                %td 
+                  = @products.shipment.charge_payment
+              %tr
+                %th 発送元の地域
+                %td
+                  = link_to "#", class:"prefectures" do
+                    = @products.shipment.area
+              %tr
+                %th 発送日の目安
+                %td 
+                  = @products.shipment.days
+        .item__box--option
+          .like
+            = icon('fa', 'star', class: 'like__icon')
+            お気に入り 0
+          .report
+            = icon('fa', 'flag', class: 'report__icon')
+            = link_to "#", class: "report-btn" do
+              不適切な商品の通報
+      .item__comment
+        %textarea.item__comment__box(id="comment__box")
+        .item__comment__notice-message
+          相手のことを考え丁寧なコメントを心がけましょう。
+          %br/
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+          %br/
+        %button.item__comment__btn(type="submit")
+          = icon('fa', 'comment', class: 'comment__icon')
+          コメントする
+      .links
+        .prev-item
+          = icon('fa', 'angle-left', class: 'prev-item__icon')
+          = link_to "#", class: "prev-item__link" do
+            前の商品
+        .next-item
+          = link_to "#", class: "next-item__link" do
+            次の商品
+          = icon('fa', 'angle-right', class: 'next-item__icon')
+      .relation-item
+        = link_to "#", class: "relation-item__link" do
+          関連商品を見る
+      .item__lists
+        .item__list
+          = link_to "#" do
+            .item__image
+              = image_tag "IMG_9072.jpg" ,class:"item__pic"
+            .item__body
+              %h3.item__name product1
+              .item__details
+                %ul.item__info
+                  %li 1000円
+                  = icon('fa', 'star', class: 'item__info__icon')
+                  0
+                %p (税込)
+                
+  = render "mypages/aside"
+  = render "mypages/footer"
+  = render "mypages/exhibition_icon"

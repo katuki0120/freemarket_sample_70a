@@ -5,7 +5,8 @@
       .main__lists__user__icon
         = link_to "#" do
           = image_tag'member_photo_noimage_thumb.png', width:"60"
-          %h1 フリマ
+          %h1 
+            = current_user.nickname
           .main__lists__user__contents
             .furima__user__number 評価
             .furima__user__shopping 出品数

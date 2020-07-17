@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
-  font-family: "Source Sans Pro", Helvetica, Arial, "游ゴシック体", "YuGothic", "メイリオ", "Meiryo", sans-serif;
+  font-family: "Source Sans Pro", Helvetica, Arial, "游ゴシック体", "YuGothic",
+    "メイリオ", "Meiryo", sans-serif;
 }
 
 .root {
@@ -98,6 +99,53 @@
           font-size: 16px;
         }
       }
+      &--three-btn {
+        &--Purchase-btn {
+          font-size: 24px;
+          display: block;
+          line-height: 60px;
+          margin-top: 16px;
+          margin-bottom: 20px;
+          background-color: $red;
+          text-align: center;
+          cursor: pointer;
+          a {
+            color: $white;
+            font-weight: 600;
+          }
+        }
+        &--change-btn {
+          margin: 20px 0 20px 0;
+
+          &--edit {
+            display: block;
+            margin: 10px 0 10px 0;
+            background-color: $blue;
+            font-size: 24px;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+            color: $white;
+            font-weight: 600;
+          }
+          .text__box {
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+          }
+          &--delete {
+            display: block;
+            margin: 10px 0 10px 0;
+            background-color: $darkgray;
+            font-size: 24px;
+            line-height: 60px;
+            text-align: center;
+            cursor: pointer;
+            color: $white;
+            font-weight: 600;
+          }
+        }
+      }
       &--text {
         line-height: 1.5;
         font-size: 18px;
@@ -151,10 +199,10 @@
           border: 1px solid $orange;
           &__icon {
             display: flex;
-            align-items: center
+            align-items: center;
           }
         }
-        .report{
+        .report {
           margin: 10px 0 0;
           display: flex;
           font-size: 14px;
@@ -226,7 +274,7 @@
           color: $skyblue;
         }
       }
-      &::after{
+      &::after {
         display: block;
         content: "";
         clear: both;
@@ -285,8 +333,8 @@
           }
           .item__details {
             font-size: 16px;
-            .item__info{
-              display:flex;
+            .item__info {
+              display: flex;
               li {
                 margin-left: 0;
               }

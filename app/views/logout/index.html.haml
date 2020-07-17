@@ -6,8 +6,10 @@
         %form
           .main__lists__contents__logout--single
             %button.button
-              = link_to "ログアウト","#", method: :delete
+              = link_to destroy_user_session_path, method: :delete, class:"button" do
+                ログアウト
     = render "mypages/navlists"
   = render "mypages/aside"
   = render "mypages/footer"
   = render "mypages/exhibition_icon"
+

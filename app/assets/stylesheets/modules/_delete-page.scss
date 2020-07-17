@@ -1,0 +1,20 @@
+.main__delete-page {
+  height: calc(100vh - 457px);
+
+  &--contents {
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+    background-color: $darkgray;
+    color: $white;
+    margin-bottom: 100px;
+  }
+  a {
+    font-size: 30px;
+    text-decoration: none;
+    color: $white;
+    background-color: $blue;
+    display: block;
+    text-align: center;
+  }
+}

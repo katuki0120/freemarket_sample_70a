@@ -43,11 +43,12 @@
         cursor: pointer;
         li {
           display: inline-block;
-          text-align: center;
+
           width: 50%;
           h3 {
             font-size: 22px;
             border: 1px solid $gray;
+            text-align: center;
             a {
               text-decoration: none;
               color: black;
@@ -75,7 +76,7 @@
       }
     }
     .main__lists--Purchased--goods {
-      border-top: 40px solid aliceblue;
+      border-top: 40px solid whitesmoke;
       background-color: $white;
 
       &__text {
@@ -94,10 +95,11 @@
         li {
           width: 50%;
           display: inline-block;
-          text-align: center;
+
           h3 {
             font-size: 22px;
             border: 1px solid $gray;
+            text-align: center;
             a {
               text-decoration: none;
               color: black;

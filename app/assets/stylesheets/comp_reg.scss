@@ -1,3 +1,30 @@
 // Place all the styles related to the comp_reg controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.login_footer{
+  padding: 20px 0;
+  .document{
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: center;
+    li{
+      font-size: 12px;
+      margin: 16px 0px 0px 16px;
+    }
+  }
+  &__logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      height: 40.55px;
+      width: 140px;
+      margin-bottom: 8px;
+    }
+  }
+  &__furima{
+    text-align: center;
+    font-size: 12px;
+  }
+}

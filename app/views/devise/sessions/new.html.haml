@@ -1,0 +1,33 @@
+.login_main
+  %header.login_header
+    %h1
+      =image_tag  "logo.png" , width: "200px" , height: "50px"
+  %main.login_mid
+    .login_continer
+      .login_continer__login_panel
+        .login_continer__login_panel--no_account
+          %p
+            アカウントをお持ちでない方はこちら
+          = link_to  "新規会員登録", new_user_registration_path, class: "btn_default"
+        .login_continer__login_panel--form
+          .input
+            %button{class: "btn_default btn_sns btn_sns_google"}
+              = icon('fab', 'google', class: 'icon icon_google')
+              Googleでログイン
+            %button{class: "btn_default btn_sns btn_sns_facebook"}
+              = icon('fab', 'facebook-f', class: 'icon icon_facebook')
+              facebookでログイン
+            %button{class: "btn_default btn_sns btn_sns_app"}
+              = icon('fab', 'apple', class: 'icon icon_app')
+              Appでログイン
+            = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+              .field
+                = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "input__default"
+              .field
+                = f.password_field :password, autocomplete: "current-password", class: "input__default", placeholder: "パスワード"
+              .button
+                = f.submit "ログイン",class: "btn_default btn_login btn_submit"
+            = link_to new_password_path(resource_name) , class: "pass_info" do
+              パスワードをお忘れの方
+  %footer.login_footer
+    = render "login/simple_footer"
