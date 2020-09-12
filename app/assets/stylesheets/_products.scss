@@ -10,6 +10,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-flow: column;
     background-color: inherit;
     &__logo{
       color: inherit;
@@ -18,6 +19,11 @@
         height: 55.55px;
         width: 180px;
       }
+    }
+    .product_header__title{
+      font-size: 30px;
+      font-weight: bold;
+      color: rgb(4, 204, 208);
     }
   }
   .main{
@@ -122,6 +128,7 @@
             flex-wrap: wrap;
             width: 100%;
             height: auto;
+            justify-content: center;
             .preview-image{
               box-sizing: border-box;
               height: 150px;

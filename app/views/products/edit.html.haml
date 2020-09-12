@@ -1,1 +1,181 @@
-商品編集ページです。
+.wrapper
+
+  .product_header
+    = link_to root_path,class:'product_header__logo' do
+      = image_tag 'logo.png', class: 'product_header__logo-img'
+    .product_header__title
+      ＊商品編集＊
+      
+  .main
+    = form_with model: @product do |f|
+      
+      .main_image
+        .main_display__title
+          %label.title
+            出品画像
+          %span.required
+            必須
+        %p.main_image-text
+          最大10枚までアップロードできます。
+        .main_image-input
+          %ul#output-box
+            %div#input-img
+              = f.label :images, for: "input-images0",class:"input-label",data: {label_id: 0 } do
+                = f.file_field :images, multiple: true, acccept:"image/png,image/jpeg",class:'input-function',id:'input-images0'
+                = image_tag 'icon_camera.png', class: 'logo_camera'
+                %p.input-text
+                  ドラックアンドドロップ
+                  またはクリックしてファイルをダウンロード
+        .error-messages#error-image
+
+      .main_text
+        .main_text__input__name
+          .main_display__title
+            %label.title
+              商品名
+            %span.required
+              必須
+          .main_text__input__name-form
+            = f.text_field :name,class:'input-name',placeholder:"40文字まで",maxlength:'40'
+          .error-messages#error-name
+
+        .main_text__input__explanation
+          .main_display__title
+            %label.title
+              商品の説明
+            %span.required
+              必須
+          .main_text__input__explanation-form
+            = f.text_area :product_introduction,class:'input-sentences',required: "required",maxlength: '1000', rows:"7", placeholder:"商品の説明（必須 1000文字以内）※色、素材、重さ、注意点など"
+          .main_text__input__explanation-count
+            %span.count(id="count")
+              0
+            &#47;1000
+          .error-messages#error-text
+
+      .main_details
+        %p.details
+          商品の詳細
+
+        .main_details__category
+          .main_display__title
+            = f.label 'カテゴリー', class: 'main_display__label'
+            %span.main_display_require 必須
+          .main_select-wrapper__box
+            = f.select :category_id, @category_parent_array, {}, {class: 'main_select-wrapper__box--select', id: 'parent_category',name:"product[category_id]"}
+          .error-messages#error-category
+
+        .main_details__size
+          .main_display__title
+            %label.title
+              サイズ
+            %span.required
+              必須
+          = f.collection_select(:size_id, Size.all, :id, :name,{include_blank: "---"}, {class: "main_details__size-select"})
+          .error-messages#error-size
+
+        .main_details__brand
+          .main_display__title
+            %label.title
+              ブランド
+            %span.optional
+              任意
+          .main_details__brand-form
+            = f.text_field :brand, class:'input-brand', placeholder:"例）シャネル"
+
+        .main_details__status
+          .main_display__title
+            %label.title
+              商品の状態
+            %span.required
+              必須
+          = f.collection_select(:product_condition_id, ProductCondition.all, :id, :name,{include_blank: "---"}, {class: "main_details__status-select"})
+          .error-messages#error-condition
+
+      .main_delivery
+        %p.delivery
+          配送について
+        .main_delivery__fee
+          .main_display__title
+            %label.title
+              配送料の負担
+            %span.required
+              必須
+          .main_delivery__fee-select
+            = f.collection_select(:delivery_fee_id, DeliveryFee.all, :id, :name,{include_blank: "---"}, {class: "delivery-fee"})
+          .error-messages#error-deliverycost
+
+        .main_delivery__area
+          .main_display__title
+            %label.title
+              発送元の地域
+            %span.required
+              必須
+          .main_delivery__area-select
+            = f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"}, {class: "area"})
+          .error-messages#error-pref
+
+        .main_delivery__days
+          .main_display__title
+            %label.title
+              発送までの日数
+            %span.required
+              必須
+          .main_delivery__days-select
+            = f.collection_select(:delivery_days_id, DeliveryDays.all, :id, :name,{include_blank: "---"}, {class: "days"})
+          .error-messages#error-delivery_days
+
+      .main_price
+        .main_price__title
+          %p.price
+            価格（¥300~9,999,999)
+          = link_to "#", class:"price_help" do
+            = image_tag "はてなのアイコン.png", class: "help_mark"
+
+        .main_price__decide
+          .main_price__decide-input
+            .main_display__title
+              %label.title
+                販売価格
+              %span.required
+                必須
+            %p.unit
+              ¥
+            .main_price__decide-input-form
+              = f.number_field :price, class:'price',placeholder:"0",id:'price'
+            .error-messages#error-price
+
+          .main_price__decide-fee
+            %p.fee-label
+              販売手数料（10％）
+            %span.fee-value(id="fee-value")
+              ー
+          .main_price__decide-profit
+            %p.profit-label
+              販売利益
+            %span.profit-value(id="profit-value")
+              ー
+  
+      .main_send
+        = f.submit '出品する',class:'exhibition'
+        = link_to root_path, class:"return" do
+          もどる
+
+
+      .main_warn
+        %p.main_warn__note
+          禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
+  
+  .product_footer
+    %ul.document
+      %li.privacy-policy
+        プライバシーポリシー
+      %li.frima-terms
+        フリマ利用規約
+      %li.law
+        特定商取引に関する表記
+    .product_footer__logo
+      = link_to root_path,class:"footer_logo" do
+        = image_tag 'logo.png', class: 'footer_logo__img'
+    %p.product_footer__furima
+      © FURIMA
