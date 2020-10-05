@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       get 'get_category_children', defaults: {format: 'json'}
       get 'get_category_grand_children', defaults: {fomat: 'json'}
     end
+    member do
+      get 'get_category_children', defaults: {format: 'json'}
+      get 'get_category_grand_children', defaults: {fomat: 'json'}
+    end
   end
   resources :sign_up, only: [:index]
   resources :login, only: [:index]

@@ -47,11 +47,26 @@ class ProductsController < ApplicationController
   
   def edit
     @product = Product.find(params[:id])
-    @category_parent_array =["---"]
+    grand_children_category = @product.category
+    children_category = grand_children_category.parent
+
+    @category_parent_array =[]
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
+
+    @category_children_array = []
+    Category.where(ancestry: children_category.ancestry).each do |children|
+      @category_children_array << children
+    end
+
+    @category_grand_children_array = []
+    Category.where(ancestry: grand_children_category.ancestry).each do |grand_children|
+      @category_grand_children_array << grand_children
+    end
+
   end
+ 
 
   private
 

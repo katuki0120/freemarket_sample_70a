@@ -63,6 +63,8 @@
             %span.main_display_require 必須
           .main_select-wrapper__box
             = f.select :category_id, @category_parent_array, {}, {class: 'main_select-wrapper__box--select', id: 'parent_category',name:"product[category_id]"}
+            = f.select :category_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "---", selected: @product.category.parent.id}),{},  {class: 'main_select-wrapper__box--select',id: 'child_category'}
+            = f.select :category_id, options_for_select(@category_grand_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "---", selected: @product.category.id}),{}, {class: 'main_select-wrapper__box--select',id: 'grand_child_category'}
           .error-messages#error-category
 
         .main_details__size
