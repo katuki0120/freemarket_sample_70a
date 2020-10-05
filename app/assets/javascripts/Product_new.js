@@ -1,83 +1,55 @@
+$(document).on('turbolinks:load', function(){
 
 
-$(document).on('turbolinks:load',function(){
+  const uploadProducts = '#input-form ul';
+  const uploadDrop = '#upload-drop';
 
-  $('#input-img').on('change',function(e){
-    
+  $('#product_images').on('change',function(e){
 
     if($("#error-image")){
       $("#error-image").remove()
     };
 
-
-    
     let files = e.target.files;
     $.each(files, function(index,file){
-      let reader = new FileReader(); 
-
-      
+      let reader = new FileReader();
       if(file.type.indexOf("image") < 0){
-        alert("画像ファイルを指定してください。");
+        alert("画像ファイルを指定してください");
         return false;
-      };
+      }
 
-      
-      reader.onload = (function(file){
+      reader.onload =(function(file){
         return function(e){
-          let imageLength = $('#output-box').children('li').length;
-          
-
-          let labelLength = $("#input-img>label").eq(-1).data('label-id');
-
-          $('#input-img').before(`<li class="preview-image" id="upload-image${labelLength}" data-image-id="${labelLength}">
-                                      <figure class="preview-image__figure">
-                                        <img src='${e.target.result}' title='${file.name}' >
-                                      </figure>
-                                      <div class="preview-image__button">
-                                        <a href="" class="preview-image__button__delete" data-image-id="${labelLength}">削除</a>
-                                      </div>
-                                    </li>`);
-          $("#input-img>label").eq(-1).css('display','none');
-          
-
-          if (imageLength < 9) {
-            
-            $("#input-img").append(`<label for="input-images${labelLength+1}" class="input-label" data-label-id="${labelLength+1}">
-                                        <input multiple="multiple" class="input-function" id="input-images${labelLength+1}" style="display: none;" type="file" >
-                                        <img class="logo_camera" src="/assets/icon_camera-24c5a3dec3f777b383180b053077a49d0416a4137a1c541d7dd3f5ce93194dee.png">
-                                        <p class="input-text">
-                                          ドラックアンドドロップ
-                                          またはクリックしてファイルをダウンロード
-                                        </p>
-                                      </label>`);
-          };
-        };
+          let itemLength = $(uploadProducts).children('li').length;
+          if (itemLength == 10){
+            return false;
+          } else{
+            $(uploadProducts).children('label').before(`<li class="main_image__input-list>
+                                                          <figure class="main_image__input-list-figure">
+                                                            <img src='${e.target.result}' title='${file.name}'>
+                                                          </figure>
+                                                          <div class= "main_image__input-upload-buttun">
+                                                            <a class="main_image__input-upload-edit">編集</a>
+                                                            <a class="main_image__input-upload-delete">削除</a>
+                                                          </div>
+                                                        </li>`);
+            $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${itemLength % 5 + 1}`);
+            if(itemLength == 9){
+              $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-10`);
+            } else {
+              $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-${(itemLength + 1) % 5}`);
+            }
+          }};
       })(file);
       reader.readAsDataURL(file);
     });
   });
 
-
-  $(document).on("click","preview-image__button__delete",function(){
-    let targetImageId = $(this).data('image-id');
-
-    $(`#upload-image${targetImageId}`).remove();
-
-    $(`[for=input_images${targetImageId}]`).remove();
-
-    let imageLength = $('#output-box').children('li').length;
-    if (imageLength < 9) {
-      let labelLength = $("#input-img>label").eq(-1).data('label-id');
-      
-      $("#input-img").append(`<label for="input-images${labelLength+1}" class="input-label" data-label-id="${labelLength+1}">
-                                  <input multiple="multiple" class="input-function" id="input-images${labelLength+1}" style="display: none;" type="file" >
-                                  <img class="logo_camera" src="/assets/icon_camera-24c5a3dec3f777b383180b053077a49d0416a4137a1c541d7dd3f5ce93194dee.png">
-                                  <p class="input-text">
-                                    ドラックアンドドロップ
-                                    またはクリックしてファイルをダウンロード
-                                  </p>
-                                </label>`);
-    };
+  $(document).on('click','.main_image__input-upload-delete',function(){
+    $(this).parents('.main_image__input-list').remove();
+    let uploadItemLength = $(uploadProducts).children('li').length;
+    $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${uploadItemLength % 5}`);
+    $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-${uploadItemLength % 5}`);
   });
 
 
@@ -192,31 +164,6 @@ $(document).on('turbolinks:load',function(){
   
   
   
-    $('#input-images0').on('click',function(e){
-      console.log(e.target.files.length)
-      $('#error-image').text('');
-      
-        $('#error-image').text('');
-        let imageLength = $('#output-box').children('li').length;
-        if(imageLength==0){
-          $('#error-image').text('画像がありません');
-        }else if(imageLength >10){
-          $('#error-image').text('画像を10枚以下にして下さい');
-        }else{
-          $('#error-image').text('');
-        }
-      });
-    
-  $('form').on('submit',function(){
-    let imageLength = $('#output-box').children('li').length;
-    if(imageLength == ''){
-      $('#error-image').text('画像がありません');
-    }else if(imageLength >10){
-      $('#error-image').text('画像を10枚以下にして下さい');
-    }else{
-      $('#error-image').text('');
-    }
-  });
 
   
   $('.input-name').on('blur',function(){

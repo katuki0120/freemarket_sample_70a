@@ -15,15 +15,18 @@
             必須
         %p.main_image-text
           最大10枚までアップロードできます。
-        .main_image-input
-          %ul#output-box
-            %div#input-img
-              = f.label :images, for: "input-images0",class:"input-label",data: {label_id: 0 } do
-                = f.file_field :images, multiple: true, acccept:"image/png,image/jpeg",class:'input-function',id:'input-images0'
-                = image_tag 'icon_camera.png', class: 'logo_camera'
-                %p.input-text
-                  ドラックアンドドロップ
-                  またはクリックしてファイルをダウンロード
+        .main_image__input.clearfix
+          .main_image__input__form
+            .main_image__input__form-upload.main_image__form-upload--have-product-0{id:'input-form'}
+              %ul.output.clearfix{id:'output'}
+                =f.label:images,class:'main_image__input__form-upload-label',id: 'dropArea' do
+                  .main_image__input__form-upload-drop.main_image__input__form-upload-drop--have-product-0{id:'upload-drop'}
+                    =f.file_field :images, multiple: true , class:'upload-drop-box', style: 'display: none;'
+                    %i.fas.fa-camera
+                    %pre.main_image__form-upload-message
+                      ドラッグアンドドロップ
+                      またはクリックしてファイルをアップロード
+                    
         .error-messages#error-image
 
       .main_text
