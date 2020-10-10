@@ -3,12 +3,13 @@ $(document).on("turbolinks:load", function () {
   const uploadDrop = '#upload-drop';
    
   $('#product_images').on('change',function(e){
-    let reader = new FileReader();
-    if(file.type.indexOf("image") < 0){
-      alert("画像ファイルを指定してください");
-      return false;
+    let files = e.target.files;
+    $.each(files, function(index, file) {
+      let reader = new FileReader();
+      if(file.type.indexOf("image") < 0){
+        alert("画像ファイルを指定してください。");
+        return false;
       }
-    
     reader.onload =(function(file){
       return function(e){
         let itemLength = $(uploadProducts).children('li').length;
@@ -16,14 +17,14 @@ $(document).on("turbolinks:load", function () {
           return false;
         } else{
           $(uploadProducts).children('label').before(`<li class="main_image__input-list>
-                                                        <figure class="main_image__input-list-figure">
-                                                          <img src='${e.target.result}' title='${file.name}'>
-                                                        </figure>
-                                                        <div class= "main_image__input-upload-buttun">
-                                                          <a class="main_image__input-upload-edit">編集</a>
-                                                          <a class="main_image__input-upload-delete">削除</a>
-                                                        </div>
-                                                      </li>`);
+                                  <figure class="main_image__input-list-figure">
+                                    <img src='${e.target.result}' title='${file.name}'>
+                                  </figure>
+                                  <div class="main_image__input-upload-buttun">
+                                    <a class="main_image__input-upload-edit" href="">編集
+                                    </a><a class="main_image__input-upload-delete">削除
+                                    </a>
+                                  </div></li>`);
           $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${itemLength % 5 + 1}`);
           if(itemLength == 9){
             $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-10`);
@@ -34,6 +35,7 @@ $(document).on("turbolinks:load", function () {
       };
     })(file);
     reader.readAsDataURL(file);
+  });
   });
 
   $(document).on('click','.main_image__input-upload-delete',function(){
