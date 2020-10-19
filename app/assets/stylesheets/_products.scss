@@ -117,68 +117,45 @@
         padding: 40px;
         font-size: 14px;
         .main_image__input__form-upload{
-          display: inline;
           ul{
-            display: inline;
-          }
-          &--have-product-1{
-            -webkit-box-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-          }
-          &--have-product-2{
-            -webkit-box-flex: 2;
-            -ms-flex: 2;
-            flex: 2;
-          }
-          &--have-product-3{
-            -webkit-box-flex: 3;
-            -ms-flex: 3;
-            flex: 3;
-          }
-          &--have-product-4{
-            -webkit-box-flex: 4;
-            -ms-flex: 4;
-            flex: 4;
-          }
-          li{
-            width: 300px;
-            height: 500px;
-            img{
+              display: flex;
+              flex-direction: column;
+            li{
               width: 300px;
               height: auto;
+              img{
+                width: 300px;
+                height: auto;
+              }
+              .main_image__input-upload-buttun{
+                display: flex;
+                border: 1px;
+                border-color: rgb(136,136,136);
+                a{
+                  background-color: white;
+                }
+              }
             }
-            .main_image__input-upload-buttun{
+            .main_image__input__form-upload-drop{
+              width: 620px;
+              height: 150px;
               display: flex;
-              a{
-                height: 50px;
-                width: 50%;
-                cursor: pointer;
-                background-color: rgb(204,204,204);
+              justify-content: center;
+              align-items: center;
+              align-content: center;
+              flex-direction: column;
+              position: relative;
+              margin-top: 16px;
+              background-color: rgb(245, 245, 245);
+              border-width: 1px;
+              border-color: rgb(204,204,204);
+              border-style: dashed;
+              border-image: initial;
+              cursor: pointer;
+              .main_image__form-upload-message{
+                text-align: center;
+                font-size: 12px;
               }
-
-              }
-            }
-          
-          .main_image__input__form-upload-drop{
-            width: 620px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
-            flex-direction: column;
-            position: relative;
-            margin-top: 16px;
-            background-color: rgb(245, 245, 245);
-            border-width: 1px;
-            border-color: rgb(204,204,204);
-            border-style: dashed;
-            border-image: initial;
-            cursor: pointer;
-            .main_image__form-upload-message{
-              text-align: center;
-              font-size: 12px;
             }
           }
         }
