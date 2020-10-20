@@ -129,10 +129,12 @@
               }
               .main_image__input-upload-buttun{
                 display: flex;
-                border: 1px;
-                border-color: rgb(136,136,136);
                 a{
+                  border: solid 0.5px  rgb(204,204,204);;
+                  height:30px;
+                  width: 50%;
                   background-color: white;
+                  text-align: center;
                 }
               }
             }
