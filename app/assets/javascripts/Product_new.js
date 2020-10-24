@@ -150,12 +150,12 @@ $(document).on("turbolinks:load", function () {
     }
   });
 
-  $("#input-images0").on("click", function (e) {
+  $(".upload-drop-box").on("click", function (e) {
     console.log(e.target.files.length);
     $("#error-image").text("");
 
     $("#error-image").text("");
-    let imageLength = $("#output-box").children("li").length;
+    let imageLength = $("#output").children("li").length;
     if (imageLength == 0) {
       $("#error-image").text("画像がありません");
     } else if (imageLength > 10) {
