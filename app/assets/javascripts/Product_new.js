@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", function () {
                                   </figure>
                                   <div class="main_image__input-upload-buttun">
                                     <a class="main_image__input-upload-edit" href="">編集
-                                    </a><a class="main_image__input-upload-delete" href="#">削除
+                                    </a><a class="main_image__input-upload-delete" >削除
                                     </a>
                                   </div></li>`);
           $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${itemLength % 5 + 1}`);
