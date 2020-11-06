@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @product.images.attach(params[:product][:images])
+    binding.pry
     if @product.save
       redirect_to "/mypages"
     else
@@ -68,11 +70,15 @@ class ProductsController < ApplicationController
 
   end
  
+  def update
+    @product = Product.find(params[:id])
+    @product.update
+  end
 
   private
 
   def product_params
-    params.require(:product).permit( :name, :price, :brand, :product_introduction, :category_id, :product_condition_id, :size_id, :delivery_fee_id, :prefecture_id, :delivery_days_id, images:[]).merge(user_id: current_user.id)
+    params.require(:product).permit( :name, :price, :brand, :product_introduction, :category_id, :product_condition_id, :size_id, :delivery_fee_id, :prefecture_id, :delivery_days_id, images: []).merge(user_id: current_user.id)
   end
 
 end

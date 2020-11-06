@@ -4,7 +4,7 @@ $(document).on("turbolinks:load", function () {
    
   $('#product_images').on('change',function(e){
     let files = e.target.files;
-    $.each(files, function(index, file) {
+    $.each(files, function(i,file) {
       let reader = new FileReader();
       if(file.type.indexOf("image") < 0){
         alert("画像ファイルを指定してください。");
