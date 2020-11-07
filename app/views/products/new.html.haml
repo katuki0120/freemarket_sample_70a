@@ -19,7 +19,7 @@
           .main_image__input__form
             .main_image__input__form-upload.main_image__form-upload--have-product-0{id:'input-form'}
               %ul.output{id:'output'}
-                =f.label:images,class:'main_image__input__form-upload-label',id: 'dropArea' do
+                =f.label :images,class:'main_image__input__form-upload-label',id: 'dropArea' do
                   .main_image__input__form-upload-drop.main_image__input__form-upload-drop--have-product-0{id:'upload-drop'}
                     =f.file_field :images, multiple: true, class:'upload-drop-box', style: 'display: none;'
                     %i.fas.fa-camera

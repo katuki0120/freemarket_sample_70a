@@ -30,10 +30,10 @@
                         編集
                       %a.main_image__input-upload-delete(href="")
                         削除
-                =f.label:images,class:'main_image__input__form-upload-label',id: 'dropArea' do
+                =f.label :images,class:'main_image__input__form-upload-label',id: 'dropArea' do
                   - if @images_length < 10
                     %div{class:"main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-#{@images_length % 5}",id:'upload-drop'}
-                      =f.file_field :images, multiple:true , class:'upload-drop-box', style: 'display: none;',name:'product[images][]'
+                      =f.file_field :images, multiple: true , class:'upload-drop-box', style: 'display: none;'
                       %i.fas.fa-camera
                       %pre.main_image__form-upload-message
                         ドラッグアンドドロップ

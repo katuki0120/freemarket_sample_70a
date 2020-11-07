@@ -2,7 +2,7 @@ $(document).on("turbolinks:load", function () {
   const uploadProducts = '#input-form ul';
   const uploadDrop = '#upload-drop';
    
-  $('#product_images').on('change',function(e){
+  $('#product_images').on('change', function(e){
     let files = e.target.files;
     $.each(files, function(i,file) {
       let reader = new FileReader();
