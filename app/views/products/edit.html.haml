@@ -8,7 +8,6 @@
       
   .main
     = form_with model: @product do |f|
-      
       .main_image
         .main_display__title
           %label.title
@@ -38,9 +37,7 @@
                       %pre.main_image__form-upload-message
                         ドラッグアンドドロップ
                         またはクリックしてファイルをアップロード
-
         .error-messages#error-image
-
       .main_text
         .main_text__input__name
           .main_display__title
@@ -51,7 +48,6 @@
           .main_text__input__name-form
             = f.text_field :name,class:'input-name',placeholder:"40文字まで",maxlength:'40'
           .error-messages#error-name
-
         .main_text__input__explanation
           .main_display__title
             %label.title
@@ -65,11 +61,9 @@
               0
             &#47;1000
           .error-messages#error-text
-
       .main_details
         %p.details
           商品の詳細
-
         .main_details__category
           .main_display__title
             = f.label 'カテゴリー', class: 'main_display__label'
@@ -79,7 +73,6 @@
             = f.select :category_id, options_for_select(@category_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "---", selected: @product.category.parent.id}),{},  {class: 'main_select-wrapper__box--select',id: 'child_category'}
             = f.select :category_id, options_for_select(@category_grand_children_array.map{|b| [b.name, b.id, {data:{category: b.id}}]}, {prompt: "---", selected: @product.category.id}),{}, {class: 'main_select-wrapper__box--select',id: 'grand_child_category'}
           .error-messages#error-category
-
         .main_details__size
           .main_display__title
             %label.title
@@ -97,7 +90,6 @@
               任意
           .main_details__brand-form
             = f.text_field :brand, class:'input-brand', placeholder:"例）シャネル"
-
         .main_details__status
           .main_display__title
             %label.title
@@ -106,7 +98,6 @@
               必須
           = f.collection_select(:product_condition_id, ProductCondition.all, :id, :name,{include_blank: "---"}, {class: "main_details__status-select"})
           .error-messages#error-condition
-
       .main_delivery
         %p.delivery
           配送について
@@ -146,7 +137,6 @@
             価格（¥300~9,999,999)
           = link_to "#", class:"price_help" do
             = image_tag "はてなのアイコン.png", class: "help_mark"
-
         .main_price__decide
           .main_price__decide-input
             .main_display__title
@@ -159,7 +149,6 @@
             .main_price__decide-input-form
               = f.number_field :price, class:'price',placeholder:"0",id:'price'
             .error-messages#error-price
-
           .main_price__decide-fee
             %p.fee-label
               販売手数料（10％）
@@ -170,17 +159,13 @@
               販売利益
             %span.profit-value(id="profit-value")
               ー
-  
       .main_send
         = f.submit '変更する',class:'exhibition'
         = link_to root_path, class:"return" do
           もどる
-
-
       .main_warn
         %p.main_warn__note
           禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
-  
   .product_footer
     %ul.document
       %li.privacy-policy
