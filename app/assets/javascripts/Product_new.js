@@ -21,8 +21,7 @@ $(document).on("turbolinks:load", function () {
                                     <img src='${e.target.result}' title='${file.name}'>
                                   </figure>
                                   <div class="main_image__input-upload-buttun">
-                                    <a class="main_image__input-upload-edit" href="">編集
-                                    </a><a class="main_image__input-upload-delete" >削除
+                                    <a class="main_image__input-upload-delete" >削除
                                     </a>
                                   </div></li>`);
           $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${itemLength % 5 + 1}`);
@@ -31,12 +30,19 @@ $(document).on("turbolinks:load", function () {
           } else {
           $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-${(itemLength + 1) % 5}`);
           }
+          if(itemLength >= 1){
+            $('.main_image__input__form-upload-label').css('display','none');
+            $('.error-messages#error-image').css('display','none');
+          }else{
+            
+          }
         }
       };
     })(file);
     reader.readAsDataURL(file);
   });
   });
+
 
   $(document).on('click','.main_image__input-upload-delete',function(){
     $(this).parents('.main_image__input-list').remove();
