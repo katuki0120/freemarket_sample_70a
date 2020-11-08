@@ -30,11 +30,9 @@ $(document).on("turbolinks:load", function () {
           } else {
           $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-${(itemLength + 1) % 5}`);
           }
-          if(itemLength >= 1){
+          if(itemLength>= 0){
             $('.main_image__input__form-upload-label').css('display','none');
             $('.error-messages#error-image').css('display','none');
-          }else{
-            
           }
         }
       };
