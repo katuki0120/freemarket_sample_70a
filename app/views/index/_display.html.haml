@@ -1,20 +1,22 @@
-= link_to product_path(product.id), class: "display__list" do
-  .display__pic
-    - if product.images.present?
-      .imgpic
-        = image_tag (product.images[0].product_image.url)
-    -else
-      = image_tag "no_image.png"
-    /productテーブルにbuyer_idを追加
-    -if product.buyer_id.present?
-      .items-box_photo__sold
-        .items-box_photo__sold__inner
-          SOLD
-    .display__body
-      %h3.display__name
-        = product.name
-      .display__details
-        %ul.display__content
-          = "¥ #{product.price.to_s(:delimited)}"
-          %li.fa.fa-star.likeIcon 0
-        %p (税込) 
+.display__list
+  /product_pathのところは商品詳細ページに飛ぶようなパスに名前を書き換える
+  = link_to product_path(product.id) do
+    .display__pic
+      - if product.images.present?
+        .imgpic
+          = image_tag (product.images[0].product_image.url)
+      -else
+        = image_tag "no_image.png"
+      /productテーブルにbuyer_idを追加必要？ダメなら他に売り切れか判断するメソッド
+      -if product.buyer_id.present?
+        .items-box_photo__sold
+          .items-box_photo__sold__inner
+            SOLD
+      .display__body
+        %h3.display__name
+          = product.name
+        .display__details
+          %ul.display__content
+            = "¥ #{product.price.to_s(:delimited)}"
+            %li.fa.fa-star.likeIcon 0
+          %p (税込) 
