@@ -23,12 +23,10 @@
                 - @product.images.each do |image|
                   %li.main_image__input-list
                     %figure.main_image__input-list-figure
-                      = image_tag image
+                      = image_tag (image)
                     .main_image__input-upload-buttun
-                      %a.main_image__input-upload-edit(href="")
-                        編集
-                      %a.main_image__input-upload-delete
-                        削除
+                      = link_to "削除", image_delete_product_path(image.id), class:"main_image__input-upload-delete", method: :delete
+
                 =f.label :images,class:'main_image__input__form-upload-label',id: 'dropArea' do
                   - if @images_length < 10
                     %div{class:"main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-#{@images_length % 5}",id:'upload-drop'}

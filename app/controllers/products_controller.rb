@@ -74,6 +74,10 @@ class ProductsController < ApplicationController
     redirect_to("/")
   end
 
+  def image_delete
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge
+  end
   private
 
   def product_params

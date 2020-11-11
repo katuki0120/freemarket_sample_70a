@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     member do
       get 'get_category_children', defaults: {format: 'json'}
       get 'get_category_grand_children', defaults: {fomat: 'json'}
+      delete :image_delete
     end
   end
   resources :sign_up, only: [:index]
