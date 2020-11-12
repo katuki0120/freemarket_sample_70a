@@ -48,17 +48,16 @@ $(document).on("turbolinks:load", function () {
     var imageSelectHtml = "";
     imageSelectHtml =`
     <div class="main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-0" id="upload-drop">
-    <input multiple="multiple" class="upload-drop-box" style= "display:none" type="file" name="product[images][]" id="product_images">
-    <i class="fas fa-camera"></i>
-    <pre class="main_image__form-upload-message">ドラッグアンドドロップ
-    またはクリックしてファイルをアップロード</pre>
-    </div>
+<input multiple="multiple" class="upload-drop-box" style="display: none;" type="file" name="product[images][]" id="product_images">
+<i class="fas fa-camera"></i>
+<pre class="main_image__form-upload-message">ドラッグアンドドロップ
+またはクリックしてファイルをアップロード</pre>
+</div>
     `;
     
     if(itemLength >= 1 ){
-     
     }else{
-      $('.main_image__input__form-upload-label').append(imageSelectHtml);
+      $('.main_image__input__form-upload-drop').replaceWith(imageSelectHtml);
       };
   
     let uploadItemLength = $(uploadProducts).children('li').length;
