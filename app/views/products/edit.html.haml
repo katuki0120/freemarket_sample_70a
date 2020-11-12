@@ -26,15 +26,6 @@
                       = image_tag (image)
                     .main_image__input-upload-buttun
                       = link_to "削除", image_delete_product_path(image.id), class:"main_image__input-upload-delete", method: :delete
-
-                =f.label :images,class:'main_image__input__form-upload-label',id: 'dropArea' do
-                  - if @images_length < 10
-                    %div{class:"main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-#{@images_length % 5}",id:'upload-drop'}
-                      =f.file_field :images, multiple: true , class:'upload-drop-box', style: 'display: none;'
-                      %i.fas.fa-camera
-                      %pre.main_image__form-upload-message
-                        ドラッグアンドドロップ
-                        またはクリックしてファイルをアップロード
         .error-messages#error-image
       .main_text
         .main_text__input__name

@@ -21,8 +21,7 @@ $(document).on("turbolinks:load", function () {
                                     <img src='${e.target.result}' title='${file.name}'>
                                   </figure>
                                   <div class="main_image__input-upload-buttun">
-                                    <a class="main_image__input-upload-delete" >削除
-                                    </a>
+                                  <a class="main_image__input-upload-delete" >削除</a>
                                   </div></li>`);
           $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${itemLength % 5 + 1}`);
           if(itemLength == 9){
