@@ -70,8 +70,11 @@ class ProductsController < ApplicationController
  
   def update
     @product = Product.find(params[:id])
-    @product.update(product_params)
-    redirect_to("/")
+    if @product.update(product_params)
+      redirect_to("/")
+    else
+      render :edit
+    end
   end
 
   def image_delete
