@@ -2,7 +2,7 @@
   .display__pic
     - if product.images.present?
       .imgpic
-        = image_tag (product.images[0].product_image.url)
+        = image_tag (product.images[0])
     -else
       = image_tag "no_image.png"
     /productテーブルにbuyer_idを追加
