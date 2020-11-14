@@ -15,7 +15,7 @@
           %span.required
             必須
         %p.main_image-text
-          最大10枚までアップロードできます。
+          複数枚選択してください。（最大10枚までアップロードできます。）
         .main_image__input
           .main_image__input__form
             .main_image__input__form-upload.main_image__form-upload--have-product-0{id:'input-form'}
@@ -26,6 +26,13 @@
                       = image_tag (image)
                     .main_image__input-upload-buttun
                       = link_to "削除", image_delete_product_path(image.id), class:"main_image__input-upload-delete", method: :delete
+                =f.label :images, class:'main_image__input__form-upload-label', id: 'dropArea' do
+                  .main_image__input__form-upload-drop.main_image__input__form-upload-drop--have-product-0{id:'upload-drop',style:'display: none;'}
+                    = f.file_field :images, multiple: true, class:'upload-drop-box', style: 'display: none;'
+                    %i.fas.fa-camera
+                    %pre.main_image__form-upload-message
+                      ドラッグアンドドロップ
+                      またはクリックしてファイルをアップロード
         .error-messages#error-image
       .main_text
         .main_text__input__name

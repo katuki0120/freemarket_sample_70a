@@ -36,8 +36,6 @@ $(document).on("turbolinks:load", function () {
                                 $('.main_image__input__form-upload-drop').show();
                                 $('.error-messages#error-image').show();
                               }
-                                
-                              
           }
         }
     }
