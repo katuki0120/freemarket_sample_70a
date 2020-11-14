@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   resources :mypages, only: [:index]
   resources :item_page, only: [:index]
   resources :comp_reg, only: [:index]
-  
-  resources :products, only: [:create, :index, :show, :new, :edit, :destroy, :update] do
+   
+  resources :products do
     collection do
       get 'get_category_children', defaults: {format: 'json'}
       get 'get_category_grand_children', defaults: {fomat: 'json'}

@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only:[:show,:destroy,:edit,:update]
 
   def new
     @product = Product.new
@@ -17,7 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(product_params)
+    @product = Product.new(product_params)
     if @product.save
       redirect_to "/mypages"
     else
@@ -30,7 +31,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
     @category = @product.category
     @size = @product.size.name
     @product_condition = @product.product_condition.name
@@ -40,13 +40,10 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
-    
   end
   
   def edit
-    @product = Product.find(params[:id])
     @images_length = @product.images.length
     grand_children_category = @product.category
     children_category = grand_children_category.parent
@@ -69,9 +66,8 @@ class ProductsController < ApplicationController
   end
  
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
-      redirect_to("/")
+      redirect_to root_path
     else
       render :edit
     end
@@ -85,6 +81,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit( :name, :price, :brand, :product_introduction, :category_id, :product_condition_id, :size_id, :delivery_fee_id, :prefecture_id, :delivery_days_id, images: []).merge(user_id: current_user.id)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 
 end
