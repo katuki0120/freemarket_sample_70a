@@ -32,7 +32,12 @@ $(document).on("turbolinks:load", function () {
                              if(itemLength >= 0 ){
                               $('.main_image__input__form-upload-drop').css('display','none');
                               $('.error-messages#error-image').css('display','none');
+                              }else{
+                                $('.main_image__input__form-upload-drop').show();
+                                $('.error-messages#error-image').show();
                               }
+                                
+                              
           }
         }
     }
@@ -45,21 +50,13 @@ $(document).on("turbolinks:load", function () {
   $(document).on('click','.main_image__input-upload-delete',function(){
     $(this).parents('.main_image__input-list').remove();
     let itemLength = $(uploadProducts).children('li').length;
-    var imageSelectHtml = "";
-    imageSelectHtml =`
-    <div class="main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-0" id="upload-drop">
-<input multiple="multiple" class="upload-drop-box" style="display: none;" type="file" name="product[images][]" id="product_images">
-<i class="fas fa-camera"></i>
-<pre class="main_image__form-upload-message">ドラッグアンドドロップ
-またはクリックしてファイルをアップロード</pre>
-</div>
-    `;
-    
     if(itemLength >= 1 ){
+      $('.main_image__input__form-upload-drop').css('display','none');
+      $('.error-messages#error-image').css('display','none');
     }else{
-      $('.main_image__input__form-upload-drop').replaceWith(imageSelectHtml);
+      $('.main_image__input__form-upload-drop').show();
+      $('.error-messages#error-image').show();
       };
-  
     let uploadItemLength = $(uploadProducts).children('li').length;
     $(uploadProducts).removeClass().addClass(`main_image__input__form-upload main_image__form-upload--have-product-${uploadItemLength % 5}`);
     $(uploadDrop).removeClass().addClass(`main_image__input__form-upload-drop main_image__input__form-upload-drop--have-product-${uploadItemLength % 5}`);
