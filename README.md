@@ -206,9 +206,9 @@ Things you may want to cover:
 
 ## Product_conditionsテーブル
 
-|Column             |Type  |Options    |
-|-------------------|------|-----------|
-|product_condition |string|null: false |
+|Column             |Type  |Options     |
+|-------------------|------|------------|
+|product_condition |string|null: false  |
 
 ### Association
 - has_many :products
