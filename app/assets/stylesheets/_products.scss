@@ -2,51 +2,45 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: rgb(245, 245, 245);
-  font-family: YuGothic, "Yu Gothic", sans-serif;
-  .product_header {
+  background-color:rgb(245,245,245);
+  font-family:YuGothic,'Yu Gothic',sans-serif;
+  .product_header{
     width: 100%;
     height: 126px;
     align-items: center;
     display: flex;
     justify-content: center;
-    flex-flow: column;
     background-color: inherit;
-    &__logo {
+    &__logo{
       color: inherit;
       text-decoration: none;
-      &-img {
+      &-img{
         height: 55.55px;
         width: 180px;
       }
     }
-    .product_header__title {
-      font-size: 30px;
-      font-weight: bold;
-      color: rgb(4, 204, 208);
-    }
   }
-  .main {
+  .main{
     display: flex;
     justify-content: center;
     align-items: center;
-    form {
+    form{
       background-color: $white;
       max-width: 700px;
 
-      %main_title {
-        color: rgb(136, 136, 136);
+      %main_title{
+        color: rgb(136,136,136);
         font-size: 14px;
         font-weight: 600;
         line-height: 1.4em;
         margin-bottom: 24px;
       }
-      .main_display__label {
+      .main_display__label{
         font-size: 14px;
         font-weight: 600;
         line-height: 1.4em;
       }
-      .main_display_require {
+      .main_display_require{
         color: $white;
         background-color: red;
         font-size: 12px;
@@ -57,11 +51,11 @@
         display: flex;
         align-items: center;
       }
-      .main_display__title {
+      .main_display__title{
         height: 19px;
         display: flex;
 
-        %label-size {
+        %label-size{
           font-size: 12px;
           font-weight: 600;
           padding: 0 4px;
@@ -70,19 +64,19 @@
           display: flex;
           align-items: center;
         }
-        .title {
+        .title{
           font-size: 14px;
           font-weight: 600;
           line-height: 1.4em;
         }
-        .required {
+        .required{
           @extend %label-size;
           color: $white;
-          background-color: red;
+          background-color: red; 
         }
       }
 
-      select {
+      select{
         background-color: $white;
         border: solid 1px $input-border-color;
         border-radius: 4px;
@@ -96,7 +90,7 @@
         margin-top: 16px;
       }
 
-      input {
+      input{
         border: 1px solid $input-border-color;
         border-radius: 4px;
         height: 48px;
@@ -106,86 +100,109 @@
         margin-top: 16px;
       }
 
-      .error-messages {
+      .error-messages{
         color: #ff0211;
         font-size: 14px;
         line-height: 1.4em;
         margin: 16px 0;
         box-sizing: border-box;
       }
-      .main_image {
+
+      .main_image{
         padding: 40px;
-        font-size: 14px;
-        .main_image__input__form-upload {
-          ul {
+        &-text{
+          margin-top: 16px;
+          font-size: 14px;
+          line-height: 1.4em;
+        }
+        &-input{
+          ul{
+            box-sizing: border-box;
             display: flex;
-            flex-direction: column;
-            li {
-              width: 300px;
-              height: auto;
-              img {
-                width: 300px;
-                height: auto;
-              }
-              .main_image__input-upload-buttun {
-                display: flex;
-                .main_image__input-upload-delete {
-                  border: solid 0.5px rgb(204, 204, 204);
-                  height: 30px;
-                  width: 50%;
-                  background-color: white;
-                  text-align: center;
-                  cursor: pointer;
-                  color: $blue;
-                  &:hover {
-                    background-color: $gray;
-                  }
+            flex-wrap: wrap;
+            width: 100%;
+            height: auto;
+            .preview-image{
+              box-sizing: border-box;
+              height: 150px;
+              width: 20%;
+              padding: 0px 4px;
+              margin-top: 8px;
+              border: solid 1px rgb(204, 204, 204);
+              &__figure{
+                margin:0 auto;
+                height: 118px;
+                background-color:white;
+                img{
+                  box-sizing: border-box;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
                 }
               }
+              &__button{
+                border-top-width: 1px;
+                border-top-color: rgb(204, 204, 204);
+                border-top-style: solid;
+                justify-content: space-around;
+                display: flex;
+                align-items: center;
+                height: 32px;
+                color: rgb(0, 149, 238);
+              }
             }
-            .main_image__input__form-upload-drop {
-              width: 620px;
-              height: 150px;
+            .input-label{
               display: flex;
-              justify-content: center;
               align-items: center;
-              align-content: center;
+              justify-content: center;
               flex-direction: column;
-              position: relative;
-              margin-top: 16px;
-              background-color: rgb(245, 245, 245);
+              flex-wrap: wrap;
+              height: 150px;
+              width: 600px;
+              background-color:rgb(175, 175, 175);
+              margin-top: 8px;
               border-width: 1px;
-              border-color: rgb(204, 204, 204);
               border-style: dashed;
-              border-image: initial;
+              border-color: rgb(121, 121, 121);
               cursor: pointer;
-              .main_image__form-upload-message {
+              .input-function{
+                display: none;
+              }
+              .logo_camera{
+                height: 20px;
+                width: 18px;
+                margin-bottom: 8px;
+              }
+              .input-text{
                 text-align: center;
                 font-size: 12px;
+                line-height: 1.4em;
+                width: 100%;
+                color: whitesmoke;
               }
             }
           }
         }
       }
 
-      .main_text {
+      .main_text{
         padding: 40px;
-        &__input__explanation {
+        &__input__explanation{
           margin-top: 32px;
-          &-form {
-            .input-sentences {
+          &-form{
+            .input-sentences{
               margin-top: 16px;
               border: 1px solid $input-border-color;
               border-radius: 4px;
               color: #222;
               font-size: 16px;
               width: 100%;
-              padding: 13px 16px;
+              padding:13px 16px;
               box-sizing: border-box;
               display: block;
             }
           }
-          &-count {
+          &-count{
             margin-top: 16px;
             text-align: right;
             color: #888;
@@ -195,106 +212,106 @@
         }
       }
 
-      .main_details {
+      .main_details{
         padding: 40px;
-        .details {
-          @extend %main_title;
+        .details{
+          @extend %main_title
         }
-        &__category {
+        &__category{
           margin-top: 32px;
         }
-        &__size {
+        &__size{
           margin-top: 32px;
         }
-
-        &__brand {
+        
+        &__brand{
           margin-top: 32px;
-          .optional {
+          .optional{
             @extend %label-size;
             background-color: #bfbfbf;
           }
         }
-        &__status {
+        &__status{
           margin-top: 32px;
         }
       }
 
-      .main_delivery {
+      .main_delivery{
         padding: 40px;
-        .delivery {
+        .delivery{
           @extend %main_title;
         }
-        &__area {
+        &__area{
           margin-top: 32px;
         }
-        &__days {
+        &__days{
           margin-top: 32px;
         }
       }
 
-      .main_price {
+      .main_price{
         padding: 40px 40px 0px;
-        &__title {
+        &__title{
           display: flex;
           @extend %main_title;
-          img {
+          img{
             height: 16px;
             width: 16px;
             margin-left: 4px;
           }
         }
-        &__decide {
-          &-input {
+        &__decide{
+          &-input{
             display: flex;
             align-items: center;
             padding-bottom: 12px;
-            .main_display__title {
+            .main_display__title{
               margin-right: auto;
             }
-            .unit {
+            .unit{
               margin-right: 8px;
               font-size: 14px;
             }
-            &-form {
+            &-form{
               display: inline-block;
               position: relative;
-              .price {
+              .price{
                 text-align: right;
                 width: 285px;
               }
             }
           }
-          #error-price {
+          #error-price{
             box-sizing: border-box;
             text-align: right;
           }
 
-          &-fee {
+          &-fee{
             display: flex;
             padding: 12px 0px;
             font-size: 14px;
-            .fee-label {
+            .fee-label{
               margin-right: auto;
             }
           }
 
-          &-profit {
+          &-profit{
             display: flex;
             padding: 12px 0px;
             font-size: 14px;
             margin-bottom: 40px;
-            .profit-label {
+            .profit-label{
               margin-right: auto;
             }
           }
         }
       }
-      .main_send {
+      .main_send{
         width: 360px;
         margin: 0px auto 32px;
         text-align: center;
-
-        .exhibition {
+        
+        .exhibition{
           font-size: 17px;
           min-height: 48px;
           padding: 0 24px;
@@ -303,47 +320,47 @@
           border: 1px solid transparent;
           font-weight: 600;
           cursor: pointer;
-          background-color: $skyblue;
+          background-color:$skyblue;
           color: $white;
           margin-bottom: 10px;
         }
-        .return {
+        .return{
           color: $blue;
           text-decoration: none;
         }
       }
-      .main_warn {
+      .main_warn{
         margin: 0px 40px 64px;
-        &__note {
+        &__note{
           font-size: 12px;
           line-height: 1.4em;
         }
       }
     }
   }
-  .product_footer {
+  .product_footer{
     padding: 40px 0px 41px;
-    .document {
+    .document{
       display: flex;
       margin-bottom: 40px;
       align-items: center;
       justify-content: center;
-      li {
+      li{
         font-size: 12px;
         margin: 16px 0px 0px 16px;
       }
     }
-    &__logo {
+    &__logo{
       display: flex;
       align-items: center;
       justify-content: center;
-      img {
+      img{
         height: 40.55px;
         width: 140px;
         margin-bottom: 8px;
       }
     }
-    &__furima {
+    &__furima{
       text-align: center;
       font-size: 12px;
     }
