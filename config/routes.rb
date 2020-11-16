@@ -15,11 +15,16 @@ Rails.application.routes.draw do
   resources :mypages, only: [:index]
   resources :item_page, only: [:index]
   resources :comp_reg, only: [:index]
-  
-  resources :products, only: [:create, :index, :show, :new, :edit, :destroy] do
+   
+  resources :products do
     collection do
       get 'get_category_children', defaults: {format: 'json'}
       get 'get_category_grand_children', defaults: {fomat: 'json'}
+    end
+    member do
+      get 'get_category_children', defaults: {format: 'json'}
+      get 'get_category_grand_children', defaults: {fomat: 'json'}
+      delete :image_delete
     end
   end
   resources :sign_up, only: [:index]
