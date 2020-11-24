@@ -53,7 +53,7 @@
         .item__box--three-btn
         - if user_signed_in? && current_user.id == @product.user_id
           .item__box--three-btn--change-btn
-            = link_to "商品の編集", purchase_index_path, class:"item__box--three-btn--change-btn--edit"
+            = link_to "商品の編集", edit_product_path, class:"item__box--three-btn--change-btn--edit"
             %p.text__box OR
             = link_to "商品の削除",product_path, method: :delete, data: { confirm: '【確認】本当に削除しますか？' }, class:"item__box--three-btn--change-btn--delete"
         - else

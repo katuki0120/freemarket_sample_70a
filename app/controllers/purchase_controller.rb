@@ -2,7 +2,7 @@ class PurchaseController < ApplicationController
   require 'payjp'
 
   def index
-    #@products = Products.find(params[:product_id])
+    @products = Products.find(params[:product_id])
     @post_address =  current_user.city + current_user.address
     @post_name = current_user.destination_family_name + current_user.destination_first_name
     card = CreditCard.where(user_id: current_user.id).first
