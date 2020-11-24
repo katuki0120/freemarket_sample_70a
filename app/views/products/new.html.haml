@@ -5,7 +5,8 @@
       = image_tag 'logo.png', class: 'product_header__logo-img'
 
   .main
-    = form_with model: @product do |f| 
+    = form_with model: @product do |f|
+      
       .main_image
         .main_display__title
           %label.title
@@ -13,19 +14,18 @@
           %span.required
             必須
         %p.main_image-text
-          複数枚選択してください。（最大10枚までアップロードできます。）
-        .main_image__input
-          .main_image__input__form
-            .main_image__input__form-upload.main_image__form-upload--have-product-0{id:'input-form'}
-              %ul.output{id:'output'}
-                =f.label :images, class:'main_image__input__form-upload-label', id: 'dropArea' do
-                  .main_image__input__form-upload-drop.main_image__input__form-upload-drop--have-product-0{id:'upload-drop'}
-                    = f.file_field :images, multiple: true, class:'upload-drop-box', style: 'display: none;'
-                    %i.fas.fa-camera
-                    %pre.main_image__form-upload-message
-                      ドラッグアンドドロップ
-                      またはクリックしてファイルをアップロード
-          .error-messages#error-image
+          最大10枚までアップロードできます。
+        .main_image-input
+          %ul#output-box
+            %div#input-img
+              = f.label :images, for: "input-images0",class:"input-label",data: {label_id: 0 } do
+                = f.file_field :images, multiple: true, acccept:"image/png,image/jpeg",class:'input-function',id:'input-images0'
+                = image_tag 'icon_camera.png', class: 'logo_camera'
+                %p.input-text
+                  ドラックアンドドロップ
+                  またはクリックしてファイルをダウンロード
+        .error-messages#error-image
+
       .main_text
         .main_text__input__name
           .main_display__title
@@ -36,6 +36,7 @@
           .main_text__input__name-form
             = f.text_field :name,class:'input-name',placeholder:"40文字まで",maxlength:'40'
           .error-messages#error-name
+
         .main_text__input__explanation
           .main_display__title
             %label.title
@@ -49,9 +50,11 @@
               0
             &#47;1000
           .error-messages#error-text
+
       .main_details
         %p.details
           商品の詳細
+
         .main_details__category
           .main_display__title
             = f.label 'カテゴリー', class: 'main_display__label'
@@ -59,6 +62,7 @@
           .main_select-wrapper__box
             = f.select :category_id, @category_parent_array, {}, {class: 'main_select-wrapper__box--select', id: 'parent_category',name:"product[category_id]"}
           .error-messages#error-category
+
         .main_details__size
           .main_display__title
             %label.title
@@ -76,6 +80,7 @@
               任意
           .main_details__brand-form
             = f.text_field :brand, class:'input-brand', placeholder:"例）シャネル"
+
         .main_details__status
           .main_display__title
             %label.title
@@ -84,6 +89,7 @@
               必須
           = f.collection_select(:product_condition_id, ProductCondition.all, :id, :name,{include_blank: "---"}, {class: "main_details__status-select"})
           .error-messages#error-condition
+
       .main_delivery
         %p.delivery
           配送について
@@ -96,6 +102,7 @@
           .main_delivery__fee-select
             = f.collection_select(:delivery_fee_id, DeliveryFee.all, :id, :name,{include_blank: "---"}, {class: "delivery-fee"})
           .error-messages#error-deliverycost
+
         .main_delivery__area
           .main_display__title
             %label.title
@@ -105,6 +112,7 @@
           .main_delivery__area-select
             = f.collection_select(:prefecture_id, Prefecture.all, :id, :name,{include_blank: "---"}, {class: "area"})
           .error-messages#error-pref
+
         .main_delivery__days
           .main_display__title
             %label.title
@@ -114,12 +122,14 @@
           .main_delivery__days-select
             = f.collection_select(:delivery_days_id, DeliveryDays.all, :id, :name,{include_blank: "---"}, {class: "days"})
           .error-messages#error-delivery_days
+
       .main_price
         .main_price__title
           %p.price
             価格（¥300~9,999,999)
           = link_to "#", class:"price_help" do
             = image_tag "はてなのアイコン.png", class: "help_mark"
+
         .main_price__decide
           .main_price__decide-input
             .main_display__title
