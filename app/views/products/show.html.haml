@@ -35,6 +35,7 @@
           .main
             .main__image
               - if @product.images.attached?
+                //画像の枚数の分だけ処理の繰り返しが発生します。修正必要です。
                 -  @product.images.each do |image|
                   = image_tag image, class: "main__image--pic", height: "346px"
                   .sub__images

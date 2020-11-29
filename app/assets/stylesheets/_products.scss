@@ -61,7 +61,7 @@
         height: 19px;
         display: flex;
 
-        %label-size{
+        %label-size {
           font-size: 12px;
           font-weight: 600;
           padding: 0 4px;
@@ -170,7 +170,7 @@
 
       .main_text {
         padding: 40px;
-        &__input__explanation{
+        &__input__explanation {
           margin-top: 32px;
           &-form {
             .input-sentences {
@@ -198,7 +198,7 @@
       .main_details {
         padding: 40px;
         .details {
-          @extend %main_title
+          @extend %main_title;
         }
         &__category {
           margin-top: 32px;
@@ -206,7 +206,6 @@
         &__size {
           margin-top: 32px;
         }
-        
         &__brand {
           margin-top: 32px;
           .optional {

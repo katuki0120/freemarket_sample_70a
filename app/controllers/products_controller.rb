@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
   end
-
+  
   def edit
     @images_length = @product.images.length
     grand_children_category = @product.category
@@ -49,11 +49,11 @@ class ProductsController < ApplicationController
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
-
     @category_children_array = Category.where(ancestry: children_category.ancestry)
     @category_grand_children_array = Category.where(ancestry: grand_children_category.ancestry)
-  end
 
+  end
+ 
   def update
     if @product.update(product_params)
       redirect_to root_path
@@ -66,7 +66,6 @@ class ProductsController < ApplicationController
     @image = ActiveStorage::Attachment.find(params[:id])
     @image.purge
   end
-
   private
 
   def product_params
@@ -76,4 +75,5 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
+
 end
