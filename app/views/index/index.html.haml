@@ -80,20 +80,16 @@
     .display__sentence
       = link_to "新規投稿商品", "/", class: "display__link"
     .display__lists
-      = render 'display'
-      = render 'display'
-      = render 'display'
-      = render 'display'
+      - @products.each do |product|
+        = render partial: "display", locals: {product:product}
 .display
   .display__title ピックアップブランド
   .display__contents
     .display__sentence
       = link_to "アーカイバ", "/" , class: "display__link"
     .display__lists
-      = render 'display'
-      = render 'display'
-      = render 'display'
-      = render 'display'
+      - @products.each do |product|
+        = render partial: "display", locals: {product:product}
 = render 'mypages/aside'
 = render 'mypages/footer'
 = render 'mypages/exhibition_icon'

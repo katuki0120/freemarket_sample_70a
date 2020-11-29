@@ -236,7 +236,6 @@ a {
   &__list {
     width: 220px;
     display: inline-block;
-    float: left;
   } 
   &__pic {
     position: relative;
@@ -258,6 +257,32 @@ a {
   &__list :hover{
     opacity: 0.5;
   }
+  img {
+    width: 220px;
+    height: 150px;
+  }
 }
 
-
+.items-box_photo__sold{
+  width: 0;
+  height: 0;
+  border-width: 120px 120px 0 0;
+  border-color: $skyblue transparent transparent transparent;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-style: solid;
+  &__inner{
+    top: -90px;
+    font-size: 30px;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    color: $white;
+    transform: rotate(-45deg);
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+}
