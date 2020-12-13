@@ -59,7 +59,7 @@
             = link_to "商品の削除",product_path, method: :delete, data: { confirm: '【確認】本当に削除しますか？' }, class:"item__box--three-btn--change-btn--delete"
         - else
           .item__box--three-btn--Purchase-btn
-            = link_to "購入画面に進む", purchase_index_path
+            = link_to "購入画面に進む", purchase_path
         .item__box--text 
           = @product.product_introduction
         .item__box--table
