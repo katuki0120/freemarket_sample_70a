@@ -35,17 +35,13 @@
             %section.buy-content-buy-user-info
               .buy-content-inner
                 %h3 支払い方法
-                
                 - if @default_card_information.blank?               
                 - else
                 .payment
                   .payment-img
                     = image_tag "#{@card_src}", width: 40, height: 28
                   .payment-info
-                    = "**** **** **** " + @default_card_information.last4
-                    - exp_month = @default_card_information.exp_month.to_s
-                    - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
-                    = exp_month + " / " + exp_year
+                   
                   %p.buy-user-info-text
             %section.buy-content-buy-user-info
               .buy-content-inner
