@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
 
   def index 
-    @products = Product.all
+    @products = Product.limit(5).order(id: :desc)
   end
   
 
