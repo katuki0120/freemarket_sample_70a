@@ -35,13 +35,10 @@
           .main
             .main__image
               - if @product.images.attached?
-                //画像の枚数の分だけ処理の繰り返しが発生します。修正必要です。
-                -  @product.images.each do |image|
-                  = image_tag image, class: "main__image--pic", height: "346px"
-                  .sub__images
-                    = image_tag image, class: "sub__images--pic-1", height: "87px"
-                    = image_tag image, class: "sub__images--pic-2", height: "87px"
-                    = image_tag image, class: "sub__images--pic-3", height: "87px"
+                = image_tag @product.images[0], class: "main__image--pic",height: "346px"
+                .sub__images
+                  - @product.images.each do |image|
+                    = image_tag image,class: "sub__images--pic-1",height:"77px"
         .item__box--price
           %span
             ¥
