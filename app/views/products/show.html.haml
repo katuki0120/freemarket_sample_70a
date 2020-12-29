@@ -54,6 +54,9 @@
             = link_to "商品の編集", edit_product_path, class:"item__box--three-btn--change-btn--edit"
             %p.text__box OR
             = link_to "商品の削除",product_path, method: :delete, data: { confirm: '【確認】本当に削除しますか？' }, class:"item__box--three-btn--change-btn--delete"
+        - elsif @product.buyer_id.present?
+          .item__box--three-btn--change-btn--sold
+            SOLD
         - else
           .item__box--three-btn--Purchase-btn
             = link_to "購入画面に進む", purchase_path
