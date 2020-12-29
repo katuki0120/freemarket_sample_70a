@@ -10,13 +10,17 @@
         .buy-content-inner
           .buy-item-box
             %h3.buy-item-image
-              = image_tag("sanpul.png", width:"80")#(@product_imgs.image.first.image.url,width:80px,hight:80px)
+              = image_tag @products.images[0],width:"80px",hight:"80px"
             .item-detail
-              %p.item-name サンプルTシャツ
+              %p.item-name 
+                = @products.name
               %p.item-price
-                %span  10000
-                -#  =@products.price
-                %span.item-shipping-fee （税込）送料込み
+                %span  
+                = @products.price
+                円
+                %span.item-shipping-fee 
+                %br (税込)
+                %br 送料込み
       %section.buy-content-buy-item
         .buy-content-inner
           .buy-form
@@ -24,8 +28,8 @@
               %li.buy-price-box-you-pay
                 .buy-price-box-you-pay-label 支払い金額
                 .buy-price-box-cell
-                  %span{"date-buy-pay": "10000"} ¥10,000
-                  -# ="¥ #{@products.prrice.to_s(:delimited)}"
+                  %span{"date-buy-pay": "10000"}
+                  ="¥ #{@products.price.to_s(:delimited)}"
             %ul.buy-accorbion-buy-not-have-point
               %li.accorbion-perent
                 .checkbox-default-buy-use-point
@@ -54,7 +58,7 @@
                   = @post_name
             %section.buy-content-buy-user-info
               %p.has-info-text 郵便局/コンビニ受取をご希望の方は、購入後に取引画面から受取場所を変更する事は可能です。出品者が発送作業を開始した後は受取の変更はできませんので、早めに変更を行ってください。
-              = form_tag(action: :pay, method: :post) do
+              = link_to pay_purchase_path(@products),method: :post do
                 %button.btn-default.btn-red.bold 購入する
                 %input#user_info_is_not_complete{type: "hidden"}
   %footer.single-footer
