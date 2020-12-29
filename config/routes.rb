@@ -39,13 +39,11 @@ Rails.application.routes.draw do
   end
   resources :purchase, only: [:index] do
     collection do
-      post 'pay', to: 'purchase#pay'
       get 'done', to: 'purchase#done'
     end
-
-    member do 
+    member do
+      post 'pay', to: 'purchase#pay'
       get 'index', to: 'purchase#index'
     end
-    
   end
 end

@@ -9,8 +9,7 @@ class PurchaseController < ApplicationController
     card = CreditCard.where(user_id: current_user.id).first
 
     if card.blank?
-
-      #redirect_to controller: "creditcard", action: "new"
+      redirect_to controller: "creditcard", action: "new"
     else
       Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
 
@@ -37,22 +36,21 @@ class PurchaseController < ApplicationController
 
 
     def  done
-      @product_purchaser= Product.find(params[:id])
-      @product_purchaser.update( buyer_id: current_user.id)
-     end
+    end
   
 
 
   def pay
-    #@products = Products.find(params[:id])
+    @products = Product.find(params[:id])
     card = CreditCard.find_by(user_id: current_user.id)
     Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
     Payjp::Charge.create(
-    amount: 13500, #@products.price
+    amount: @products.price,
     customer: card.customer_id, 
     currency: 'jpy',
     )
-    redirect_to  done_purchase_index_path 
+    @products.update( buyer_id: current_user.id)
+    redirect_to  done_purchase_index_path
   end
   
   # private
